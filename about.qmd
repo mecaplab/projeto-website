@@ -1,0 +1,10 @@
+---
+title: "Sobre"
+image: logo-icon.svg
+about:
+    template: jolla
+    image-width: 22em
+    image-shape: rectangle
+---
+
+Somos o...

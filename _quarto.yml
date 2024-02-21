@@ -1,0 +1,42 @@
+project:
+  type: website
+
+website:
+  favicon: favicon.svg
+  title: "MECAP.LAB"
+
+  navbar:
+    collapse: true
+    right:
+      - href: index.qmd
+        text: Ínicio
+      - href: about.qmd
+        text: Sobre
+      - icon: github
+        href: https://github.com/mecaplab
+
+  body-header: LABORATÓRIO DE MERCADO DE CAPITAIS
+
+  page-footer:
+    border: true
+    left: "© 2024, MECAP.LAB. < / >"
+    right: "Construído com [Quarto.org](https://quarto.org/)."
+
+  open-graph:
+      locale: pt_BR
+      site-name: Quarto
+
+execute:
+  freeze: auto
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    highlight-style: a11y-dark
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    
