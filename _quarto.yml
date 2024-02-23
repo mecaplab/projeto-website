@@ -14,12 +14,17 @@ website:
         text: Sobre
       - icon: github
         href: https://github.com/mecaplab
-
-  body-header: LABORATÓRIO DE MERCADO DE CAPITAIS
+      - icon: bi-instagram
+        href: https://www.instagram.com/mecaplab
 
   page-footer:
     border: true
     left: "© 2024, MECAP.LAB. < / >"
+    center:
+      - icon: github
+        href: https://github.com/mecaplab
+      - icon: bi-instagram
+        href: https://www.instagram.com/mecaplab
     right: "Construído com [Quarto.org](https://quarto.org/)."
 
   open-graph:
