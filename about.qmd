@@ -1,7 +1,7 @@
 ---
 title: ""
 toc: false
-image: logo-com-fundo.svg
+image: img\logo-com-fundo.svg
 about:
     template: jolla
     image-width: 22em
@@ -18,8 +18,32 @@ O MECAPLAB é um laboratório da Universidade Federal da Paraíba. **Fundado em 
 
 ## Responsáveis Pelo MECAP.LAB
 
+<div class="grid">
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Gustavo](img\Gustavo.png)
+    Prof. Dr. Gustavo Correa Xavier
+  </div>
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Claudio](img\Claudio.png)
+    Prof. Dr. Claudio Germano
+  </div>
+</div>
+
 ## Equipe de Estagiários (2024)
+
+<div class="grid">
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Lucas](img\Lucas.png)
+    Discente. Lucas Souza Santos
+  </div>
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Adalto](img\Adalto.png)
+    Discente. Adalto 
+  </div>
+</div>
 
 ## Premiações
 
-  
+<img src="img\prmio-jgp.png" width="400"/>
+
+> Em 2022 o grupo de estudos em Mercado de Capitais do MECAPLAB entitulado `UFPB³`, participou da competição de ligas universitárias de mercado de capitais promovida pela Gestora de Fundos, Carioca, JGP. A equipe com muita satisfação alcançou a 3º colocação. 

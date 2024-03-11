@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  favicon: favicon.svg
+  favicon: img\favicon.svg
   title: "MECAP.LAB"
 
   navbar:
