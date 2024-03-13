@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  favicon: img\favicon.svg
+  favicon: img\new-logo-mecaplab.svg
   title: "MECAP.LAB"
 
   navbar:

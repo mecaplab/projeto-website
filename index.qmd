@@ -3,7 +3,7 @@ title: ""
 toc: false
 ---
 
-![](img\MECAP.LAB.svg) 
+![](img\MECAPLAB.png) 
 
 > Vinculado ao curso de administração do Campus III da Universidade Federal da Paraíba (UFPB), O Laboratório de Mercado de Capitais (MECAPLAB) vem desde 1998 realizando ações e pesquisas visando obter insights de gestão de negócios a partir de dados reais do mercado financeiro.
 
