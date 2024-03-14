@@ -51,15 +51,40 @@ O MECAPLAB é um laboratório da Universidade Federal da Paraíba. **Fundado em 
 ## Entre em contato
 
 O Laboratório recebe novos pesquisadores a cada semestre ao longo do período letivo da UFPB e desenvolve projetos de pesquisa acadêmica, ações de capacitação profissional, desenvolvimento de produtos para o setor privado, bem como desenvolve pesquisa em parcerias com entes externos do setor público e privado.
- (HEAD)
 
+### Nos mande uma mensagem atráves do formulário!
 
-
-[Entre em contato](adaaltooalves@gmail.com){.button}
+<form class="Form" name="contact" method="POST" data-netlify="true">
+  <p>
+    <label><input type="text" name="name" placeholder="Seu nome" class="form-control"/></label>
+  </p>
+  <p>
+    <label><input type="email" name="email" placeholder="Seu email" class="form-control"/></label>
+  </p>
+  <p>
+    <label><textarea name="message" placeholder="Mensagem" class="form-control"></textarea></label>
+  </p>
+  <p>
+    <button type="submit" class="form-button">Enviar</button>
+  </p>
+</form>
 
 <style>
-.button {
-    display: inline-block;
+
+.Form {
+    margin-top: 1rem;
+}
+.form-control {
+    display: block;
+    max-width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-button {
+    display: -webkit-inline-box;
     padding: 10px 20px;
     color: white;
     background-color: #007BFF;
@@ -68,4 +93,3 @@ O Laboratório recebe novos pesquisadores a cada semestre ao longo do período l
     text-decoration: none;
 }
 </style>
-(HEAD/)
