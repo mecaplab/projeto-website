@@ -1,7 +1,7 @@
 ---
 title: ""
 toc: false
-image: logo-com-fundo.svg
+image: img\new-logo-mecaplab.png
 about:
     template: jolla
     image-width: 22em
@@ -18,13 +18,41 @@ O MECAPLAB é um laboratório da Universidade Federal da Paraíba. **Fundado em 
 
 ## Responsáveis Pelo MECAP.LAB
 
+<div class="grid">
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Gustavo](img\Gustavo.png)
+    Prof. Dr. Gustavo Correa Xavier
+  </div>
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Claudio](img\Claudio.png)
+    Prof. Dr. Claudio Germano dos Santos Oliveira
+  </div>
+</div>
+
 ## Equipe de Estagiários (2024)
 
+<div class="grid">
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Lucas](img\Lucas.png)
+    Discente. Lucas Souza Santos
+  </div>
+  <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
+  ![Adalto](img\Adalto.jpeg)
+    Discente. Adalto 
+  </div>
+</div>
+
 ## Premiações
+
+<img src="img\premio-jgp.png" width="400"/>
+
+> Em 2022, o grupo de estudos em Mercado de Capitais do MECAPLAB, intitulado **UFPB³**, participou da competição de ligas universitárias de mercado de capitais promovida pela Gestora de Fundos Carioca, JGP. Com muita satisfação, a equipe alcançou a 3ª colocação. 🎉📈
 
 ## Entre em contato
 
 O Laboratório recebe novos pesquisadores a cada semestre ao longo do período letivo da UFPB e desenvolve projetos de pesquisa acadêmica, ações de capacitação profissional, desenvolvimento de produtos para o setor privado, bem como desenvolve pesquisa em parcerias com entes externos do setor público e privado.
+ (HEAD)
+
 
 
 [Entre em contato](adaaltooalves@gmail.com){.button}
@@ -40,4 +68,4 @@ O Laboratório recebe novos pesquisadores a cada semestre ao longo do período l
     text-decoration: none;
 }
 </style>
-
+(HEAD/)

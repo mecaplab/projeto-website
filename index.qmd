@@ -3,8 +3,14 @@ title: ""
 toc: false
 ---
 
-![](MECAP.LAB.svg) 
+![](img\MECAPLAB.png) 
 
-> Vinculado ao curso de administração do Campus III da Universidade Federal da Paraíba (UFPB), O Laboratório de Mercado de Capitais (MECAPLAB) vem desde 1998 realizando ações e pesquisas visam obter insights de gestão de negócios a partir de dados reais do mercado financeiro.
+> Vinculado ao curso de administração do Campus III da Universidade Federal da Paraíba (UFPB), O Laboratório de Mercado de Capitais (MECAPLAB) vem desde 1998 realizando ações e pesquisas visando obter insights de gestão de negócios a partir de dados reais do mercado financeiro.
 
-# Em Construção, aguarde...
+# Em construção, aguarde...
+
+# Acompanhe o calendário econômico da semana
+<div id="economicCalendarWidget"></div>
+<script async type="text/javascript" data-type="calendar-widget" src="https://www.tradays.com/c/js/widgets/calendar/widget.js?v=13">
+  {"width":800,"height":500,"mode":"2","lang":"pt","theme":1}
+</script>

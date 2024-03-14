@@ -2,16 +2,41 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Em Construção, aguarde…",
+    "title": "Em construção, aguarde…",
     "section": "",
-    "text": "Vinculado ao curso de administração do Campus III da Universidade Federal da Paraíba (UFPB), O Laboratório de Mercado de Capitais (MECAPLAB) vem desde 1998 realizando ações e pesquisas visam obter insights de gestão de negócios a partir de dados reais do mercado financeiro.\n\n\nEm Construção, aguarde…"
+    "text": "Vinculado ao curso de administração do Campus III da Universidade Federal da Paraíba (UFPB), O Laboratório de Mercado de Capitais (MECAPLAB) vem desde 1998 realizando ações e pesquisas visando obter insights de gestão de negócios a partir de dados reais do mercado financeiro.\n\n\nEm construção, aguarde…\n\n\nAcompanhe o calendário econômico da semana"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Quem Somos?",
     "section": "",
+<<<<<<< HEAD
     "text": "O MECAPLAB é um laboratório da Universidade Federal da Paraíba. Fundado em 1998, o laboratório está vinculado ao curso de administração do Campus III da UFPB e vem realizando projetos relacionados à gestão de negócios, finanças empresariais e pessoais, análises de políticas econômicas, estudos sobre mobilidade urbana e pesquisas sobre mercado financeiro. Atualmente, o MECAPLAB está sob responsabilidade dos docentes Gustavo Correia Xavier e Claudio Germano, no qual ambos vem colaborando juntos diversos projetos juntamente com discentes de Administração no Campus III da UFPB.\n\n\n\n\n\n\n\n\n\n\n\n\nO Laboratório recebe novos pesquisadores a cada semestre ao longo do período letivo da UFPB e desenvolve projetos de pesquisa acadêmica, ações de capacitação profissional, desenvolvimento de produtos para o setor privado, bem como desenvolve pesquisa em parcerias com entes externos do setor público e privado."
+=======
+    "text": "O MECAPLAB é um laboratório da Universidade Federal da Paraíba. Fundado em 1998, o laboratório está vinculado ao curso de administração do Campus III da UFPB e vem realizando projetos relacionados à gestão de negócios, finanças empresariais e pessoais, análises de políticas econômicas, estudos sobre mobilidade urbana e pesquisas sobre mercado financeiro. Atualmente, o MECAPLAB está sob responsabilidade dos docentes Gustavo Correia Xavier e Claudio Germano, no qual ambos vem colaborando juntos diversos projetos juntamente com discentes de Administração no Campus III da UFPB.\n\n\n\n\n\n Prof. Dr. Gustavo Correa Xavier\n\n\n Prof. Dr. Claudio Germano dos Santos Oliveira\n\n\n\n\n\n\n\n Discente. Lucas Souza Santos\n\n\n Discente. Adalto\n\n\n\n\n\n\n\nEm 2022, o grupo de estudos em Mercado de Capitais do MECAPLAB, intitulado UFPB³, participou da competição de ligas universitárias de mercado de capitais promovida pela Gestora de Fundos Carioca, JGP. Com muita satisfação, a equipe alcançou a 3ª colocação. 🎉📈\n\n\n\n\nO Laboratório recebe novos pesquisadores a cada semestre ao longo do período letivo da UFPB e desenvolve projetos de pesquisa acadêmica, ações de capacitação profissional, desenvolvimento de produtos para o setor privado, bem como desenvolve pesquisa em parcerias com entes externos do setor público e privado."
+  },
+  {
+    "objectID": "about.html#responsáveis-pelo-mecap.lab",
+    "href": "about.html#responsáveis-pelo-mecap.lab",
+    "title": "Quem Somos?",
+    "section": "",
+    "text": "Prof. Dr. Gustavo Correa Xavier\n\n\n Prof. Dr. Claudio Germano dos Santos Oliveira"
+  },
+  {
+    "objectID": "about.html#equipe-de-estagiários-2024",
+    "href": "about.html#equipe-de-estagiários-2024",
+    "title": "Quem Somos?",
+    "section": "",
+    "text": "Discente. Lucas Souza Santos\n\n\n Discente. Adalto"
+  },
+  {
+    "objectID": "about.html#premiações",
+    "href": "about.html#premiações",
+    "title": "Quem Somos?",
+    "section": "",
+    "text": "Em 2022, o grupo de estudos em Mercado de Capitais do MECAPLAB, intitulado UFPB³, participou da competição de ligas universitárias de mercado de capitais promovida pela Gestora de Fundos Carioca, JGP. Com muita satisfação, a equipe alcançou a 3ª colocação. 🎉📈"
+>>>>>>> 89c1cfdc5797b9699206b60c86da8b0df2f6aa7f
   },
   {
     "objectID": "about.html#entre-em-contato",
