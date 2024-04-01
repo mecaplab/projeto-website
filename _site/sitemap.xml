@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>https://mecaplab.netlify.app/blog.html</loc>
-    <lastmod>2024-04-01T00:48:07.819Z</lastmod>
+    <lastmod>2024-04-01T00:58:04.675Z</lastmod>
   </url>
   <url>
     <loc>https://mecaplab.netlify.app/index.html</loc>
@@ -27,5 +27,9 @@
   <url>
     <loc>https://mecaplab.netlify.app/contact.html</loc>
     <lastmod>2024-03-31T23:05:51.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/blog/post_01/index.html</loc>
+    <lastmod>2024-04-01T00:58:01.881Z</lastmod>
   </url>
 </urlset>

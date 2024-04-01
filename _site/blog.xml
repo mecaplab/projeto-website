@@ -14,7 +14,7 @@
 <item>
   <title>Primeiro Blog Post</title>
   <dc:creator>Mecaplab </dc:creator>
-  <link>https://mecaplab.netlify.app/posts/post_01/index.html</link>
+  <link>https://mecaplab.netlify.app/blog/post_01/index.html</link>
   <description><![CDATA[ 
 
 
@@ -28,9 +28,9 @@
 
  ]]></description>
   <category>Notícia</category>
-  <guid>https://mecaplab.netlify.app/posts/post_01/index.html</guid>
+  <guid>https://mecaplab.netlify.app/blog/post_01/index.html</guid>
   <pubDate>Sun, 31 Mar 2024 03:00:00 GMT</pubDate>
-  <media:content url="https://mecaplab.netlify.app/posts/post_01/thumb-01.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://mecaplab.netlify.app/blog/post_01/thumb-01.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
