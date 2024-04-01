@@ -4,6 +4,8 @@ project:
 website:
   favicon: img\new-logo-mecaplab.svg
   title: "MECAP.LAB"
+  site-url: https://mecaplab.netlify.app/
+  description: "Site do MECAP.LAB"
 
   navbar:
     collapse: true
@@ -12,6 +14,8 @@ website:
         text: Ínicio
       - href: about.qmd
         text: Sobre
+      - href: blog.qmd
+        text: Blog
       - icon: github
         href: https://github.com/mecaplab
       - icon: bi-instagram

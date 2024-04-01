@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>MECAP.LAB</title>
+<link>https://mecaplab.netlify.app/blog.html</link>
+<atom:link href="https://mecaplab.netlify.app/blog.xml" rel="self" type="application/rss+xml"/>
+<description>Site do MECAP.LAB</description>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Sun, 31 Mar 2024 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>Primeiro Blog Post</title>
+  <dc:creator>Mecaplab </dc:creator>
+  <link>https://mecaplab.netlify.app/posts/post_01/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="bem-vindo-ao-blog-do-mecaplab" class="level1">
+<h1>Bem vindo ao blog do MECAPLAB!</h1>
+
+
+</section>
+
+ ]]></description>
+  <category>Notícia</category>
+  <guid>https://mecaplab.netlify.app/posts/post_01/index.html</guid>
+  <pubDate>Sun, 31 Mar 2024 03:00:00 GMT</pubDate>
+  <media:content url="https://mecaplab.netlify.app/posts/post_01/thumb-01.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>

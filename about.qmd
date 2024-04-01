@@ -8,7 +8,7 @@ about:
     image-shape: rounded
 ---
 
-# Quem Somos?
+# Quem Somos ❔
 
 ---
 
@@ -16,7 +16,7 @@ O MECAPLAB é um laboratório da Universidade Federal da Paraíba. **Fundado em 
 
 ---
 
-## Responsáveis Pelo MECAP.LAB
+## Responsáveis Pelo MECAP.LAB 👨‍🏫
 
 <div class="grid">
   <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
@@ -29,7 +29,7 @@ O MECAPLAB é um laboratório da Universidade Federal da Paraíba. **Fundado em 
   </div>
 </div>
 
-## Equipe de Estagiários (2024)
+## Equipe de Estagiários (2024.1) 👨‍💻
 
 <div class="grid">
   <div class="colunas" style="display: grid; align-items: center; grid-column: auto/span 6">
@@ -42,13 +42,13 @@ O MECAPLAB é um laboratório da Universidade Federal da Paraíba. **Fundado em 
   </div>
 </div>
 
-## Premiações
+## Premiações 🏆
 
 <img src="img\premio-jgp.png" width="400"/>
 
 > Em 2022, o grupo de estudos em Mercado de Capitais do MECAPLAB, intitulado **UFPB³**, participou da competição de ligas universitárias de mercado de capitais promovida pela Gestora de Fundos Carioca, JGP. Com muita satisfação, a equipe alcançou a 3ª colocação. 🎉📈
 
-## Entre em contato
+## Entre em contato 📧
 
 O Laboratório recebe novos pesquisadores a cada semestre ao longo do período letivo da UFPB e desenvolve projetos de pesquisa acadêmica, ações de capacitação profissional, desenvolvimento de produtos para o setor privado, bem como desenvolve pesquisa em parcerias com entes externos do setor público e privado.
 

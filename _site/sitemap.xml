@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.myblogexample.io/blog.html</loc>
+    <lastmod>2024-03-31T19:03:22.588Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/blog.html</loc>
+    <lastmod>2024-04-01T00:48:07.819Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/index.html</loc>
+    <lastmod>2024-04-01T00:48:01.600Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/about.html</loc>
+    <lastmod>2024-04-01T00:44:46.915Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/posts/post_01/index.html</loc>
+    <lastmod>2024-04-01T00:23:49.718Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/posts/post_01 copy/index.html</loc>
+    <lastmod>2024-03-31T19:15:53.743Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mecaplab.netlify.app/contact.html</loc>
+    <lastmod>2024-03-31T23:05:51.406Z</lastmod>
+  </url>
+</urlset>

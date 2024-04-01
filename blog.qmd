@@ -1,0 +1,11 @@
+---
+title: "Blog - MECAPLAB"
+listing:
+  contents: blog
+  sort: "date desc"
+  type: grid
+  categories: true
+  feed: true
+  image-placeholder: img/new-logo-mecaplab.png
+---
+

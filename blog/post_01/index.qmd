@@ -1,0 +1,9 @@
+---
+title: "Primeiro Blog Post"
+author: "Mecaplab"
+date: "2024-03-31"
+categories: [Notícia]
+image: thumb-01.jpg
+---
+
+# Bem vindo ao blog do MECAPLAB!
