@@ -7,5 +7,6 @@ listing:
   categories: true
   feed: true
   image-placeholder: img/new-logo-mecaplab.png
+  fields: [image, title, categories, author, date,]
 ---
 

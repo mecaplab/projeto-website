@@ -1,5 +1,5 @@
 ---
-title: "Primeiro Blog Post"
+title: "Boas vindas!"
 author: "Mecaplab"
 date: "2024-03-31"
 categories: [Notícia]
@@ -7,3 +7,5 @@ image: thumb-01.jpg
 ---
 
 # Bem vindo ao blog do MECAPLAB!
+
+ Vamos compartilhar conhecimento de aluno para aluno, de aluno para comunidade. Então, não deixe de nos acompanhar!
