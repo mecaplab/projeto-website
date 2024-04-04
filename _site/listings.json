@@ -2,15 +2,17 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/post_02/index.html",
-      "/blog/post_01/index.html"
+      "/blog/post_03/post03.html",
+      "/blog/post_02/post02.html",
+      "/blog/post_01/post01.html"
     ]
   },
   {
     "listing": "/index.html",
     "items": [
-      "/blog/post_02/index.html",
-      "/blog/post_01/index.html"
+      "/blog/post_03/post03.html",
+      "/blog/post_02/post02.html",
+      "/blog/post_01/post01.html"
     ]
   }
 ]

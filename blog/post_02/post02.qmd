@@ -1,8 +1,9 @@
 ---
-title: "(parte I) Dados textuais e previsão de variáveis financeiras"
-author: "Lucas Souza Santos"
-date: "2024-04-04"
+title: "Parte I - Dados textuais e previsão de variáveis financeiras"
+author: "Lucas S. Santos"
+date: "2024-04-03"
 categories: [data_science, mercado_de_capitais, nlp,]
+image: thumb_02.png
 ---
 
 Este artigo trata-se do produto de 1 ano de pesquisa e estudo do projeto de PIBIC desonvolvido por `Lucas Souza Santos` como bolsista entre `2022-2023`, com foco em Ciência de Dados e Mercado de Caítais.
@@ -106,4 +107,4 @@ O algoritmo K-means agrupa dados em n grupos, buscando reduzir a variância inte
 <img src="pipeline.png" width="100%"/> <br/>
 **Fonte:** Elaboração própria (2023).
 
-... Continua na (parte II) Dados textuais e previsão de variáveis financeiras. Onde são analisados e discutido os resultados e conclusões.
+... Continua em <a href="../post_03/post03.html">Parte II - Dados textuais e previsão de variáveis financeiras.</a> Onde são analisados e discutido os resultados e conclusões.
