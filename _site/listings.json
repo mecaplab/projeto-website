@@ -2,15 +2,27 @@
   {
     "listing": "/blog.html",
     "items": [
+<<<<<<< HEAD
       "/blog/post_22/index.html",
       "/blog/post_01/index.html"
+=======
+      "/blog/post_03/post03.html",
+      "/blog/post_02/post02.html",
+      "/blog/post_01/post01.html"
+>>>>>>> 32f45a03fa7c8aa888bd71e7b909c56f8ae1c232
     ]
   },
   {
     "listing": "/index.html",
     "items": [
+<<<<<<< HEAD
       "/blog/post_22/index.html",
       "/blog/post_01/index.html"
+=======
+      "/blog/post_03/post03.html",
+      "/blog/post_02/post02.html",
+      "/blog/post_01/post01.html"
+>>>>>>> 32f45a03fa7c8aa888bd71e7b909c56f8ae1c232
     ]
   }
 ]

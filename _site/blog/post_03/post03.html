@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lucas S. Santos">
+<meta name="dcterms.date" content="2024-04-04">
 
-<title>MECAP.LAB</title>
+<title>MECAP.LAB - Parte II - Dados textuais e previsão de variáveis financeiras</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,27 +25,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./img/new-logo-mecaplab.svg" rel="icon" type="image/svg+xml">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/new-logo-mecaplab.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,80 +71,26 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-sample-listings .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-sample-listings'] = new List('listing-sample-listings', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="MECAP.LAB">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="MECAP.LAB - Parte II - Dados textuais e previsão de variáveis financeiras">
+<meta property="og:description" content="Site do MECAP.LAB">
+<meta property="og:image" content="https://mecaplab.netlify.app/blog/post_03/thumb_02.png">
 <meta property="og:site_name" content="Quarto">
 <meta property="og:locale" content="pt_BR">
+<meta property="og:image:height" content="552">
+<meta property="og:image:width" content="890">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">MECAP.LAB</span>
     </a>
   </div>
@@ -155,15 +101,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Ínicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Sobre</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item compact">
@@ -185,123 +131,124 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Parte II - Dados textuais e previsão de variáveis financeiras</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data_science</div>
+                <div class="quarto-category">mercado_de_capitais</div>
+                <div class="quarto-category">nlp</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lucas S. Santos </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 4, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-
-
-<p><img src="img\MECAPLAB.png" class="img-fluid"></p>
-<blockquote class="blockquote">
-<p>Vinculado ao curso de administração do Campus III da Universidade Federal da Paraíba (UFPB), O Laboratório de Mercado de Capitais (MECAPLAB) vem desde 1998 realizando ações e pesquisas visando obter insights de gestão de negócios a partir de dados reais do mercado financeiro.</p>
-</blockquote>
-<section id="últimas-publicações" class="level1">
-<h1>Últimas publicações 📰</h1>
-<div id="listing-sample-listings" class="quarto-listing quarto-listing-container-table">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-sample-listings-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-sample-listings'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#resultados-e-discussão" id="toc-resultados-e-discussão" class="nav-link active" data-scroll-target="#resultados-e-discussão">RESULTADOS E DISCUSSÃO</a></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">CONCLUSÃO</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">REFERÊNCIAS</a></li>
+  <li><a href="#apêndices" id="toc-apêndices" class="nav-link" data-scroll-target="#apêndices">APÊNDICES</a></li>
+  </ul>
+</nav>
     </div>
-</div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="PROJETO" data-listing-date-sort="1712286000000" data-listing-file-modified-sort="1712360529393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="109" data-listing-title-sort="Cuidando das Finanças Pessoais - Ano 3" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Apr 5, 2024</span>
-</td>
-<td>
-<a href="./blog/post_22/index.html" class="title listing-title">Cuidando das Finanças Pessoais - Ano 3</a>
-</td>
-<td>
-<span class="listing-author">Mecaplab </span>
-</td>
-</tr>
-<tr data-index="1" data-categories="data_science,mercado_de_capitais,nlp" data-listing-date-sort="1712199600000" data-listing-file-modified-sort="1712360392091" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1986" data-listing-title-sort="Parte II - Dados textuais e previsão de variáveis financeiras" data-listing-filename-sort="post03.qmd">
-<td>
-<span class="listing-date">Apr 4, 2024</span>
-</td>
-<td>
-<a href="./blog/post_03/post03.html" class="title listing-title">Parte II - Dados textuais e previsão de variáveis financeiras</a>
-</td>
-<td>
-<span class="listing-author">Lucas S. Santos</span>
-</td>
-</tr>
-<tr data-index="2" data-categories="data_science,mercado_de_capitais,nlp" data-listing-date-sort="1712113200000" data-listing-file-modified-sort="1712360392067" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2490" data-listing-title-sort="Parte I - Dados textuais e previsão de variáveis financeiras" data-listing-filename-sort="post02.qmd">
-<td>
-<span class="listing-date">Apr 3, 2024</span>
-</td>
-<td>
-<a href="./blog/post_02/post02.html" class="title listing-title">Parte I - Dados textuais e previsão de variáveis financeiras</a>
-</td>
-<td>
-<span class="listing-author">Lucas S. Santos</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="Notícia" data-listing-date-sort="1711854000000" data-listing-file-modified-sort="1712360392062" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="18" data-listing-title-sort="Boas vindas!" data-listing-filename-sort="post01.qmd">
-<td>
-<span class="listing-date">Mar 31, 2024</span>
-</td>
-<td>
-<a href="./blog/post_01/post01.html" class="title listing-title">Boas vindas!</a>
-</td>
-<td>
-<span class="listing-author">Mecaplab </span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Continuação da <a href="../post_02/post02.html">Parte I - Dados textuais e previsão de variáveis financeiras.</a></p>
+<section id="resultados-e-discussão" class="level1">
+<h1>RESULTADOS E DISCUSSÃO</h1>
+<p>Partindo para a análise por clusters K-means, carregamos nosso corpus pré-processado anteriormente e salvo como arquivo csv. Contamos inicialmente com duas variáveis, que são a variável “Nome” que é o nome identificador de cada empresa e a variável “Texto”&nbsp; que nada mais é que a descrição das atividades das empresas, como visto abaixo.</p>
+<p><strong>Figura 04:</strong> Corpus. <br> <img src="figura_04.png" width="500"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Depois criamos uma segunda tabela, desta vez com quatro variáveis conforme a “Figura 05: Corpus Pré-processado”, agora com as variáveis “Tokens_Preprocessados” e “Texto_Preprocessado”, essas variáveis são importantes para as próximas etapas e para que não seja necessário pré-processar os arquivos novamente, tarefa esta que demandou cerca de 30 minutos.</p>
+<p><strong>Figura 05:</strong> Corpus Pré-processado. <br> <img src="figura_05.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Para uma compreensão geral no início da análise foi construído “Nuvens de Palavras” para que fosse possível visualizar as palavras mais frequentes em uma amostra dos nossos documentos. Após ter utilizado as nuvens de palavras para também ajudar a construir nosso arquivo de “StopWords” removendo assim estas palavras da nossa análise. Com o “TfidfVectorizer” da biblioteca sklearn, vetorizamos nosso corpus, como pode ser visto na “Figura 06: Vetor TF-IDF” uma parte dos vetores.</p>
+<p><strong>Figura 06:</strong> Vetor TF-IDF. <br> <img src="figura_06.png" width="300"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Em seguida, analisamos através do “Gráfico 01: Top 50 tokens” os cinquenta tokens/palavras mais frequentes em nosso corpus, onde houve uma anomalia que consistiu em que os tokens “de” e “em”&nbsp; que foram postos anteriormente em nossa lista de StopWords, porém estes tokens ainda foram contados na análise, o que pode ter sido uma falha em nosso código. Essa distribuição de frequência nos fornece a frequência de cada item do vocabulário no texto. Como podemos ver considerando as palavras mais representativas para caracterizar a atividade de um setor de empresa em ambiente de bolsa as palavras mais frequentes não chegam a uma frequência de 50x e entre aquelas mais representativas e frequentes estão tokens como “energia”, “serviço”, “produto”, “elétrico”, “crédito”, “financeiro”, “imobiliário”, “distribuição” e “mercantil”.</p>
+<p><strong>Gráfico 01:</strong> Top 50 tokens. <br> <img src="gráfico_01.png" width="600"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Como citado anteriormente o algoritmo K-means necessita que passemos para ele um número k de clusters, essa escolha é difícil principalmente porque estamos trabalhando com análise não-supervisionada, ou seja nossos dados não estão rotulados, e queremos testar justamente quantos clusters o algoritmo irá entender como ideal e quais empresas o K-means agrupa-rá juntamente como diferentes setores de atuação. Uma das maneiras de fazer isso, mas com algumas limitações, é o “Elbow Method” ou “Método Cotovelo” em tradução livre. Bengfort e Bilbro (2019) apresentaram uma visualização do método “cotovelo” para ajudar os cientistas de dados a selecionar o número ideal de clusters, ajustando o modelo com uma faixa de valores. Se o gráfico de linhas se assemelha a um braço, então o “cotovelo” (o ponto de inflexão na curva) é uma boa indicação de que o modelo subjacente se encaixa melhor nesse ponto.</p>
+<p>Sabemos que o número de clusters, que neste trabalho representam setores econômicos em que as empresas estão alocadas, conforme a B3 (2023) é de doze (12) setores econômicos, quarenta e cinco (45) subsetores econômicos e oitenta segmentos de atuação. Já o número de setores econômicos segundo a NAICS é de cento e quatro (104). Logo nosso número de grupos deve se assemelhar a estes números da B3 e também podendo ser comparado aos setores da NAICS. Pelo método cotovelo, temos um número ideal k de grupos igual a seis (6).</p>
+<p><strong>Gráfico 02:</strong> Método cotovelo para clusterização K-means. <br> <img src="gráfico_02.png" width="600"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Utilizando outro método que é o Silhouette, também chamado de Coeficiente de Silhueta. O Coeficiente de Silhueta é usado quando a verdade fundamental sobre o conjunto de dados é desconhecida e calcula a densidade de clusters computados pelo modelo. O escore é calculado pela média do coeficiente de silhueta de cada amostra, calculado como a diferença entre a distância intra conglomerado média e a distância média mais próxima de cada amostra, normalizada pelo valor máximo. Isso produz uma pontuação entre 1 e -1, onde 1 é agrupamento altamente denso e -1 é agrupamento completamente incorreto (BENGFORT; BILBRO, 2019).</p>
+<p>Nossos critérios para selecionar a melhor visualização de cluster são os seguintes, conforme este método:</p>
+<ul>
+<li>Presença de mais aglomerados com pontuações de silhueta acima da média (conforme indicado pela linha tracejada).</li>
+<li>Menos flutuação no tamanho dos gráficos de silhueta (indicando aglomerados mais uniformes).</li>
+<li>Menos pontos negativos, que representam possíveis agrupamentos incorretos.</li>
+</ul>
+<p>Assim, usando a função <code>SilhouetteVisualizer</code> da biblioteca python <code>Yellowbrick</code>, vemos que diante dos critérios um bom número de clusters é vinte e sete (27). Comparando entre os dois métodos um bom k estaria entre 5 e 27, como vimos que nos critérios de classificação da B3&nbsp; o número é bem maior que cinco, utilizamos então o <code>k=27</code> conforme o coeficiente de silhueta, veja o Apêndice A – Coeficiente de Silhueta “Gráfico 03: Coeficiente de Silhueta” e verificamos na dispersão dos dados como o agrupamento se comportou.</p>
+<p>Com o nosso k selecionado, podemos então rodar o algoritmo K-means, mas antes uma técnica comumente aplicada juntamente com o K-means é a decomposição PCA para a redução de dimensionalidade dos nossos vetores, aplicamos então o PCA aos nossos vetores, esta é uma etapa muito importante para nosso resultado. Após rodar o K-means podemos visualizar o resultado conforme o “Gráfico 04: Dispersão dos clusters”.</p>
+<p><strong>Gráfico 04:</strong> Dispersão dos clusters. <br> <img src="gráfico_04.png" width="600"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Como observado na dispersão dos 27 clusters, há grupos bem condensados e grupos dispersos, os símbolos de “x” representam o centro de cada grupo. Com a análise tem-se no canto superior direito do “Gráfico 04” pontos que representam empresas sobrepostas as quais algumas delas são: Schulz e Tupy que são empresas do setor de autopeças, Telinvest e Zain que são do setor de telecomunicações, além de empresas como a Longdis do setor de administração entre outras empresas além das mencionadas. Tomando este grupo como exemplo, podemos supor que o método de clusterização por K-means nas várias descrições de atividades não se aplica bem, mas vale ressaltar que as descrições também podem não conter com descrições relevantes, ou seja palavras que fazem referência direta às atividades da empresa e que não são tão frequentes em todos os documentos de empresas do mesmo setor conforme a B3 ou NAICS, como vimos no método TF-IDF.</p>
+<p>Entretanto empresas do setor elétrico apresentam formulários de referência (FRE) com uma maior quantidade de texto descritivo e com palavras bem mais relevantes em termos de representação do setor, isso mostra que a CVM órgão que normatiza a estrutura da FRE, regula a sua entrega e recebe os formulários juntamente com a B3 podem tomar alguma medida de mudança quanto às normas e critérios de elaboração das FREs para que assim todas as empresas declarem sistematicamente sua atividades ano-ano, atualizando as informações aos investidores. Os pontos no canto superior esquerdo do gráfico mostram o agrupamento dessas empresas do setor elétrico, que conforme a NAICS podem ser empresas: “empresa de eletricidade, gás e água” ou “geração, transmissão e distribuição de energia elétrica”.</p>
+<p>Como o objetivo é agrupar as empresas semelhantes em grupos o mais distintos possíveis, é importante entender a similaridade entre os clusters para isso usamos a matriz de similaridade ou mapa de calor com valores entre 1 (maior similaridade) e -1 (menor similaridade) visualizados pelos tons mais escuros e mais claros.</p>
+<p>No “Gráfico 05: Matriz de similaridade” podemos notar que os clusters estão bem agrupados da perspectiva da similaridade entre os grupos, já que os valores da matriz variam bastante com relação a 1. Veja o Apêndice A – Coeficiente de Silhueta.</p>
 </section>
-<section id="acompanhe-o-calendário-econômico-da-semana" class="level1">
-<h1>Acompanhe o calendário econômico da semana 📅</h1>
-<div id="economicCalendarWidget" class="embed-responsive embed-responsive-16by9">
-
-</div>
-<script async="" type="text/javascript" data-type="calendar-widget" src="https://www.tradays.com/c/js/widgets/calendar/widget.js?v=13">
-  {"width":"100%","height":"300","mode":"2","lang":"pt","theme":1}
-</script>
-
+<section id="conclusão" class="level1">
+<h1>CONCLUSÃO</h1>
+<p>Neste estudo, exploramos a aplicação de técnicas de Processamento de Linguagem Natural (PLN) e Aprendizado de Máquina (ML) na análise de dados não estruturados contidos em relatórios financeiros anuais de empresas brasileiras. Utilizando o algoritmo K-means, buscamos identificar clusters de empresas com atividades semelhantes a partir das descrições de suas atividades contidas nos Formulários de Referência (FRE) entregues à Comissão de Valores Mobiliários (CVM).</p>
+<p>Os resultados obtidos revelam insights interessantes sobre a similaridade das atividades das empresas em diferentes setores. Através da análise de clusters, observamos que algumas empresas do setor elétrico apresentam agrupamentos mais definidos, indicando uma maior concentração de palavras relevantes para esse setor nos seus relatórios. Por outro lado, em alguns casos, a técnica de clusterização não apresentou agrupamentos tão distintos, possivelmente devido à falta de informações descritivas específicas nas atividades declaradas pelas empresas, indicando a necessidade de aprimoramento na consistência das descrições de atividades.</p>
+<p>A contribuição deste estudo reside na demonstração da viabilidade do uso de dados não estruturados para identificar padrões e agrupamentos nas atividades empresariais. Além disso, destacamos a importância da qualidade e relevância das informações contidas nos relatórios financeiros, que podem impactar diretamente a eficácia das técnicas de análise. As empresas que fornecem descrições mais detalhadas e específicas sobre suas atividades tendem a se agrupar de maneira mais coesa. E isso pode ter implicações significativas para o mercado financeiro. Consequentemente observou-se que a maioria das empresas mesmo em igual setor usam poucas e diferentes palavras para autodescrição de suas atividades.</p>
+<p>Sugestões para estudos futuros incluem a expansão desta abordagem para análises de dados de anos subsequentes, a comparação entre diferentes algoritmos de agrupamento, que possam agrupar de forma melhor que o K-means, bem como a exploração de outras fontes de dados. Além disso, uma análise mais aprofundada das limitações e desafios da análise de dados não estruturados em finanças pode fornecer insights valiosos para futuras pesquisas.</p>
+</section>
+<section id="referências" class="level1">
+<h1>REFERÊNCIAS</h1>
+<p>B3. Critério de classificação. Disponível em: https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas.htm. Acesso em: 04 jun. 2023.</p>
+<p>BENGFORT, B; BILBRO, R. Yellowbrick: visualizing the scikit-learn model selection process. Journal Of Open Source Software, [S.l.], v. 4, n.&nbsp;35, p.&nbsp;1075, 24 mar. 2019. The Open Journal. http://dx.doi.org/10.21105/joss.01075.</p>
+<p>BUITINCK, L; et al.&nbsp;Scikit-learn: machine learning in python. Journal Of Machine Learning Research. [S. L.], p.&nbsp;2825-2830. out. 2011.</p>
+<p>CAI, F; LE-KHAC, N; KECHADI, M. Clustering Approaches for Financial Data Analysis: a Survey. 2016. School of Computer Science &amp; Informatics, University College Dublin, Ireland, 2016.</p>
+<p>GODEIRO, L. L. Ensaios sobre Modelos de Previsão Econômica. 2018. 116 f.&nbsp;Tese (Doutorado) - Curso de Economia, Universidade Federal da Paraíba, João Pessoa, 2018.</p>
+<p>HOBERG, Gerard; PHILLIPS, Gordon. Text-Based Network Industries and Endogenous Product Differentiation. Journal Of Political Economy, [S.L.], v. 124, n.&nbsp;5, p.&nbsp;1423-1465, out. 2016. University of Chicago Press. http://dx.doi.org/10.1086/688176.</p>
+<p>LOUGHRAN, Tim; MCDONALD, Bill. When Is a Liability Not a Liability? Textual Analysis, Dictionaries, and 10-Ks. The Journal Of Finance, [S.L.], v. 66, n.&nbsp;1, p.&nbsp;35-65, 6 jan. 2011. Wiley. http://dx.doi.org/10.1111/j.1540-6261.2010.01625.x.</p>
+<p>LOUGHRAN, T.; MCDONALD, B. Textual Analysis in Accounting and Finance: A Survey. Behavioral &amp; Experimental Finance eJournal, 2016.</p>
+<p>MOLNAR, C. Interpretable Machine Learning: a guide for making black box models explainable. 2. ed.&nbsp;[S. l.]: Lulu.com, 2022. Disponível em: https://christophm.github.io/interpretable-ml-book. Acesso em: 03 jun. 2023.</p>
+<p>MORISSETTE, L; CHARTIER, S. The k-means clustering technique: general considerations and implementation in mathematica. Tutorials In Quantitative Methods For Psychology, [S.L.], v. 9, n.&nbsp;1, p.&nbsp;15-24, 1 fev. 2013. The Quantitative Methods for Psychology. http://dx.doi.org/10.20982/tqmp.09.1.p015.</p>
+<p>NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). What are outliers in the data? Disponível em: https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm. Acesso em: 15 ago. 2023.</p>
+<p>PREMEBIDA, S. M. Guia de NLP - conceitos e técnicas. 2021. Disponível em: https://www.alura.com.br/artigos/guia-nlp-conceitos-tecnicas. Acesso em: 15 ago. 2023.</p>
+<p>QAISER, S; ALI, R. Text Mining: use of tf-idf to examine the relevance of words to documents. International Journal Of Computer Applications. [S. L.], p.&nbsp;25-29. ago. 2018. Disponível em: https://www.ijcaonline.org/archives/volume181/number1/qaiser-2018-ijca-917395.pdf. Acesso em: 16 maio. 2023.</p>
+<p>SINGER-VINE, Jeremy; CONTRIBUTORS, The Pdfplumber. Pdfplumber. 2023. Software. Disponível em: https://github.com/jsvine/pdfplumber. Acesso em: 15 ago. 2023.</p>
+<p>SPACY. Industrial-Strength Natural Language Processing: in python. in python. Disponível em: https://spacy.io/. Acesso em: 15 ago. 2023.</p>
+<p>TETLOCK, P. C.; SAAR-TSECHANSKY, M.; MACSKASSY, S. A. More than Words: Quantifying Language to Measure Firms’ Fundamentals. Texas Finance Festival, 2007.</p>
+<p>UNITED STATES. CENSUS BUREAU. NAICS Update Process Fact Sheet. Disponível em: https://www.census.gov/naics/reference_files_tools/NAICS_Update_Process_Fact_Sheet.pdf. Acesso em: 04 jun. 2023.**</p>
+<p><br></p>
+<hr>
+<p><br></p>
+</section>
+<section id="apêndices" class="level1">
+<h1>APÊNDICES</h1>
+<p><strong>Gráfico 03:</strong> Coeficiente de Silhueta. <br> <img src="gráfico_03_1.png" width="100%"> <img src="gráfico_03_2.png" width="100%"> <img src="gráfico_03_3.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p><strong>Gráfico 05:</strong> Matriz de similaridade. <br> <img src="gráfico_05.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
 
 
 </section>

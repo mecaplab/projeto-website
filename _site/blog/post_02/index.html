@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lucas Souza Santos">
+<meta name="dcterms.date" content="2024-04-04">
+
+<title>MECAP.LAB - Parte I - Dados textuais e previsão de variáveis financeiras</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/new-logo-mecaplab.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="MECAP.LAB - Parte I - Dados textuais e previsão de variáveis financeiras">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://mecaplab.netlify.app/blog/post_02/thumb_02.png">
+<meta property="og:site-name" content="Quarto">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image:height" content="552">
+<meta property="og:image:width" content="890">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MECAP.LAB</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Ínicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mecaplab" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/mecaplab" rel="" target=""><i class="bi bi-instagram" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Parte I - Dados textuais e previsão de variáveis financeiras</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data_science</div>
+                <div class="quarto-category">mercado_de_capitais</div>
+                <div class="quarto-category">nlp</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lucas Souza Santos </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 4, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#resumo" id="toc-resumo" class="nav-link active" data-scroll-target="#resumo">RESUMO</a></li>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link" data-scroll-target="#introdução">INTRODUÇÃO</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">OBJETIVOS</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-geral" id="toc-objetivo-geral" class="nav-link" data-scroll-target="#objetivo-geral">Objetivo Geral</a></li>
+  <li><a href="#objetivos-específicos" id="toc-objetivos-específicos" class="nav-link" data-scroll-target="#objetivos-específicos">Objetivos Específicos</a></li>
+  </ul></li>
+  <li><a href="#procedimentos-metodológicos" id="toc-procedimentos-metodológicos" class="nav-link" data-scroll-target="#procedimentos-metodológicos">PROCEDIMENTOS METODOLÓGICOS</a>
+  <ul class="collapse">
+  <li><a href="#obtenção-e-preparação-dos-dados" id="toc-obtenção-e-preparação-dos-dados" class="nav-link" data-scroll-target="#obtenção-e-preparação-dos-dados">Obtenção e Preparação dos Dados</a></li>
+  <li><a href="#vetorização-e-clusterização" id="toc-vetorização-e-clusterização" class="nav-link" data-scroll-target="#vetorização-e-clusterização">Vetorização e Clusterização</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Este artigo trata-se do produto de 1 ano de pesquisa e estudo do projeto de PIBIC desonvolvido por <code>Lucas Souza Santos</code> como bolsista entre <code>2022-2023</code>, com foco em Ciência de Dados e Mercado de Caítais.</p>
+<blockquote class="blockquote">
+<p>Este artigo não foi publicado oficialmente. Então não pode ser citado na integra. Seu resumo pode ser encontrado nos <a href="http://www.propesq.ufpb.br/propesq/contents/menu/publicacoes/anais-de-iniciacao-cientifica">Anais de Iniciação Científica — UNIVERSIDADE FEDERAL DA PARAÍBA - UFPB PRÓ-REITORIA DE PESQUISA - PROPESQ</a>, vigência 2022-2023.</p>
+</blockquote>
+<section id="resumo" class="level1">
+<h1>RESUMO</h1>
+<blockquote class="blockquote">
+<p>Este estudo aborda a aplicação de técnicas de Processamento de Linguagem Natural (PLN) e Aprendizado de Máquina (ML) para analisar dados textuais de relatórios financeiros anuais de empresas brasileiras. O objetivo é identificar padrões e agrupamentos nas atividades empresariais com base nas descrições das “Atividades do Emissor” nos Formulários de Referência (FRE) entregues à Comissão de Valores Mobiliários (CVM). O estudo utiliza o algoritmo K-means para realizar a clusterização dos documentos por similaridade. A análise começa com a obtenção e pré-processamento dos textos. A técnica de vetorização TF-IDF é aplicada para quantificar os textos, e o algoritmo K-means é usado para agrupar as empresas em clusters. A escolha do número de clusters é realizada através do método do cotovelo e do coeficiente de silhueta. Os resultados indicam que empresas do setor elétrico apresentam agrupamentos mais coesos, indicando a presença de palavras relevantes para esse setor nos relatórios. No entanto, em alguns casos, a clusterização não apresentou agrupamentos distintos, sugerindo a necessidade de melhorias na consistência das descrições de atividades, e outros algoritmos de agrupamento podem ser utilizados futuramente. O estudo demonstra que a qualidade e relevância das informações nos relatórios financeiros podem influenciar diretamente a eficácia das técnicas de análise. O trabalho contribui mostrando a viabilidade de usar dados não estruturados para identificar padrões nas atividades empresariais. Sugestões para futuros estudos incluem a expansão para anos subsequentes, a comparação de algoritmos de agrupamento e a exploração de outras fontes de dados.</p>
+</blockquote>
+</section>
+<section id="introdução" class="level1">
+<h1>INTRODUÇÃO</h1>
+<p>Atualmente, com a abundância de dados textuais disponíveis, especialmente em meios digitais como redes sociais, manchetes jornalísticas e relatórios empresariais, o interesse em extrair insights relevantes desse vasto acervo tem crescido consideravelmente. Técnicas computacionais, como Processamento de Linguagem Natural (PLN) e Machine Learning (ML), têm sido amplamente utilizadas para analisar esses dados e prever variáveis financeiras. Transformar a comunicação da linguagem humana em dados aos quais o computador possa entender.</p>
+<p>E para análise desses dados não-estruturados gerados no PLN um dos conjuntos de técnicas mais utilizados é o Machine Learning (ML), que é um conjunto de métodos que permitem aos computadores aprenderem com os dados para fazer e melhorar previsões (por exemplo, câncer, vendas semanais, inadimplência de crédito). O aprendizado de máquina é uma mudança de paradigma da “programação normal”, onde todas as instruções devem ser explicitamente dadas ao computador, para a “programação indireta” que ocorre por meio do fornecimento de dados (MOLNAR, 2022).</p>
+<p>A análise textual é uma área emergente em contabilidade e finanças e, como resultado, as taxonomias correspondentes ainda são um tanto imprecisas. A análise textual pode ser considerada como um subconjunto do que às vezes é rotulado de análise qualitativa, com a análise textual mais frequentemente caindo nas categorias de frases direcionadas, análise de sentimentos, modelagem de tópicos ou medidas de similaridade de documentos (LOUGHRAN; MCDONALD, 2016. p.&nbsp;2).</p>
+<p>Há várias vantagens e aplicações da quantificação de dados textuais, Tetlock; Saar-Tsechansky; Macskassy (2007) aplicam a análise textual de notícias do dia-a-dia para prever o lucro e retornos das empresas. Esse tipo de pesquisa aplicando métodos computacionais já é bastante difundido e utilizado no mercado financeiro americano, no estudo de estratégias de investimento e compreensão de diferentes tipos de ativos, sejam ações, ETFs, criptomoedas e afins. Na literatura brasileira alguns autores já aplicam essas metodologias ao mercado de ações do país, Godeiro (2018) por exemplo, utiliza textos de notícias financeiras para melhorar a previsão do prêmio de risco, aos investidores.</p>
+<p>O presente trabalho visa a coleta de dados textuais de relatórios financeiros anuais, entregues à Comissão de Valores Mobiliários (CVM) pelas empresas listadas na mesma, estes relatórios são chamados de Formulários de Referência (FRE). E assim, aplicar algoritmos de ML para clusterização (agrupamento) dos documentos por similaridade, identificando clusters por setor das empresas com base nas descrições das “Atividades do Emissor”, descritas nos FREs. Automatizando a classificação setorial a partir da autodeclaração das atividades das empresas.</p>
+<p>Também será utilizada a técnica de vetorização de textos TF-IDF. Artigos como Hoberg e Phillips (2016), Loughran e McDonald (2011), Loughran e McDonald (2016) e Tetlock, Saar-Tsechansky e Macskassy (2007) exploram a importância das palavras nos textos, relacionando a preços de ações e a outras variáveis financeiras, a técnica tf-idf dentre outras já citadas são amplamente utilizadas nestas pesquisas da área financeira.</p>
+<p>Segundo a B3 (2023), empresa do ambiente de bolsa e balcão do Brasil, a atual estrutura para a classificação setorial foi elaborada considerando-se, principalmente, os tipos e os usos dos produtos ou serviços desenvolvidos pelas empresas. Para a classificação das empresas, foram analisados os produtos ou serviços que mais contribuem para a formação das receitas das companhias, considerando-se, ainda, as receitas geradas no âmbito de empresas investidas de forma proporcional às participações acionárias detidas. No caso de companhias de participação, foi considerada a contribuição de cada setor na formação das receitas consolidadas, sendo que: Se algum setor representou participação maior ou igual a dois terços das receitas, a empresa de participação foi classificada nesse setor; Caso contrário, a empresa de participação foi classificada como holding diversificada.</p>
+<p>Nesta pesquisa, será feita a classificação das empresas por setor a partir da aplicação de um algoritmo de clusterização aos textos sobre as atividades que a empresa desenvolve, como já mencionado, esses grupos serão comparados com a classificação setorial da B3 e também com a classificação da NAICS que é o Sistema de Classificação da Indústria da América do Norte, um sistema de classificação padronizado usado para classificar empresas e atividades econômicas em setores específicos. Ele é usado principalmente pelos governos dos Estados Unidos, Canadá e México para coletar e analisar dados econômicos. O NAICS é baseado em princípios de produção incorporada e busca agrupar unidades produtoras que realizam atividades semelhantes usando recursos semelhantes (UNITED STATES, 2023).</p>
+<p>Além desta parte introdutório, este trabalho está dividido em objetivos (segunda parte), procedimentos metodológicos (terceira parte), resultados e discussão (quarta parte) e conclusão (quinta parte).</p>
+</section>
+<section id="objetivos" class="level1">
+<h1>OBJETIVOS</h1>
+<section id="objetivo-geral" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-geral">Objetivo Geral</h2>
+<p>O objetivo principal deste estudo é avaliar se os dados textuais provenientes de relatórios financeiros anuais de empresas brasileiras, quando submetidos a algoritmos de Machine Learning, possuem a mesma informatividade que os setores econômicos.</p>
+</section>
+<section id="objetivos-específicos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-específicos">Objetivos Específicos</h2>
+<ul>
+<li>Coletar dados textuais de relatórios anuais financeiros de empresas brasileiras.</li>
+<li>Aplicar técnicas de análise de dados, processamento de texto e machine learning para transformar os dados não estruturados em informações úteis aos modelos de clusterização de variáveis financeiras.</li>
+<li>Relacionar o agrupamento obtido com a classificação setorial vigente das empresas de capital aberto no Brasil.</li>
+</ul>
+</section>
+</section>
+<section id="procedimentos-metodológicos" class="level1">
+<h1>PROCEDIMENTOS METODOLÓGICOS</h1>
+<section id="obtenção-e-preparação-dos-dados" class="level2">
+<h2 class="anchored" data-anchor-id="obtenção-e-preparação-dos-dados">Obtenção e Preparação dos Dados</h2>
+<p>Informações textuais de publicações nos meios eletrônicos, sejam em redes sociais, blogs ou documentos formais como relatórios, os textos têm servido de matéria prima para vários pesquisadores de várias áreas e no ambiente financeiro e de mercado de capitais não é diferente. Para esta análise de PLN e Clusters foi obtido relatórios estruturados de todas as empresas listadas na Bolsa Brasileira (B3) e que entregaram a CVM e a B3 alguma versão do formulário de referência ao longo do ano de 2011, este ano foi escolhido por se tratar de um ano com menor número de empresas listadas do que demais anos subsequentes, outro motivo foi a ideia inicial de expandir posteriormente esta análise para os anos seguintes.</p>
+<p>Por limitações e dificuldades técnicas encontradas para a automatização do processo de downloads dos formulários por meio dos sites da CVM e da B3, os formulários foram obtidos manualmente através da página de consulta a documentos periódicos e estruturados de ações no mercado de renda variável da B3. Ao todo a consulta à B3 listou 586 empresas para consulta das FREs referente ao ano de 2011, porém apenas 580 dos arquivos listados estavam disponíveis para acesso.</p>
+<p>Chamaremos nosso conjunto de documentos/arquivos de corpus. Corpus é uma palavra do latim que significa corpo. Refere-se ao corpo de um texto, que pode ser escrito ou falado, contendo um ou mais idiomas. Para representar uma coleção de textos, temos a palavra corpora, plural de corpus. Esta coleção de textos pode ter um tema específico ou temas gerais. Alguns exemplos de textos usados em PLN são: resenhas de filmes, comentários da internet, reviews de cursos, críticas à aplicativos online, e-mails, entre outros (PREMEBIDA, 2021).</p>
+<p>Assim, após a obtenção de todas as FREs encontradas, foi realizado a aplicação de um algoritmo de elaboração própria para extração das descrições das atividades exercidas pelas empresas, contidas no tópico “7. Atividades do emissor.” dos relatórios baixados em PDF (Formato de Documento Portátil). Depois de extraídos, os textos foram salvos em arquivos TXT (Documento de texto), esta conversão foi necessária devido a necessidade de otimização do consumo de recursos computacionais e de tempo de execução.</p>
+<p>Seguindo com os filtros, para tornar o agrupamento dos clusters mais preciso, foi executado um segundo algoritmo para identificação e exclusão dos arquivos contendo apenas 200 palavras ou menos, restando 557 arquivos, por último foi realizado um terceiro filtro de forma manual, removendo arquivos que apresentaram ser outliers durante as primeiras visualizações gráficas do corpus em Word Clouds (Nuvem de Palavras), restando assim 550 arquivos mais relevantes, no caso destes outliers, eles possuíam muitos termos e símbolos irrelevantes repetidamente.</p>
+<p>Um outlier é uma observação que se encontra a uma distância anormal de outros valores em uma amostra aleatória de uma população. De certa forma, essa definição fica a cargo do analista (ou de um processo de consenso) para decidir o que será considerado anormal (NIST, 2023).</p>
+<p>Com o corpus pronto foi então realizado o pré-processamento dos arquivos, a partir da criação de uma lista de stopwords, que nada mais são do que ruídos no texto, como conectivos ou palavras irrelevantes para o objetivo do estudo em questão. Esta lista de stopwords foi incluída na lista padrão do modelo “pt_core_news_md” carregado da biblioteca do SpaCy, uma biblioteca python para PLN comumente utilizada.</p>
+<p>Em seguida foram executados a tokenização que é o processo de dividir uma frase em palavras ou tokens individuais. Durante esse processo, pontuações e caracteres especiais são completamente removidos. É importante ressaltar que os tokens não são necessariamente apenas uma palavra. De uma forma geral, tokenização é o ato de simplificar o corpus e prepará-lo para os outros estágios de processamento (PREMEBIDA, 2021).</p>
+<p>Uma terceira técnica aplicada aqui foi a normalização dos textos, feita para que o processo de análise seja mais preciso, tendo a característica de manter um padrão com todas as letras maiúsculas ou minúsculas. Geralmente, a normalização é feita depois do processo de tokenização, onde podemos encontrar frases que são semelhantes e fazer a combinação entre elas, caso queiramos, independente das diferenças (PREMEBIDA, 2021).</p>
+<p>Por fim, o corpus pré-processado foi salvo como CSV (Documento de Valores Separados Por Vírgula) para as análises posteriores.</p>
+</section>
+<section id="vetorização-e-clusterização" class="level2">
+<h2 class="anchored" data-anchor-id="vetorização-e-clusterização">Vetorização e Clusterização</h2>
+<p>Para quantificar os textos e fazer uma análise quanti por meio dos clusters precisa-se obter medidas estatísticas do corpus. Um método comum em NLP é o Bag-of-Words, porém a frequência dos termos isoladamente em cada documento não é a melhor medida. A técnica de bag of words nos permite representar o texto com a ocorrência de cada palavra, sem levar em conta a ordem das palavras ou a sua estrutura no texto. É realmente como se todas as palavras fossem colocadas dentro de um saco (PREMEBIDA, 2021).</p>
+<p>Assim, uma melhor forma para esta tarefa é a ponderação inversa da frequência do termo no documento. Os esquemas de ponderação são rotulados genericamente como tf.idf, onde tf (frequência do termo) representa o método usado para contabilizar a frequência e normalização da palavra, e idf (Inverso da Frequência no Documento) denota o método usado para ajustar o impacto em toda a coleção (LOUGHRAN; MCDONALD, 2011).</p>
+<p>Então, a pontuação TF-IDF de uma palavra em relação a um documento será calculada da seguinte maneira:</p>
+<p><code>TFIDF(palavra, documento) = TF(palavra, documento) * IDF(palavra)</code></p>
+<p><strong>Figura 01:</strong> Processo TF-IDF. <br> <img src="tf_idf.svg" width="500"> <br> <strong>Fonte:</strong> Adaptado de (QAISER; ALI, 2018).</p>
+<p>O processo de TF-IDF apresenta etapas simples, a implementação deve seguir da parte superior à inferior. Mesmo que seja um processamento simples, é fundamental prestar bastante atenção na etapa de pré-processamento dos dados, para que se obtenha resultados fidedignos (QAISER; ALI, 2018).</p>
+<p>Na prática utilizou-se o método “TfidfVectorizer” da biblioteca do scikitlearn para a aplicação do TF-IDF na vetorização dos documentos (BUITINCK et al., 2011).</p>
+<p>A análise por clusterização ou agrupamento é a última etapa metodológica deste trabalho, utilizando algoritmo de agrupamento para maximizar a similaridade total com base no uso de palavras como Hoberg e Phillips (2016), que utilizaram palavras em descrições de produtos 10-K que é o correspondente norte americano da nossa FRE aqui do Brasil. No nosso trabalho, porém foram utilizadas descrições das atividades do emissor da FRE, ou seja, cada empresa de capital aberto no Brasil.</p>
+<p>Agrupamento de dados é uma forma de classificação não supervisionada, pois os clusters são formados pela avaliação de similaridades e diferenças de características intrínsecas entre diferentes casos, e o agrupamento de casos é baseado naqueles emergentes semelhanças e não em um critério externo. Além disso, estas técnicas podem ser úteis para conjuntos de dados de qualquer dimensionalidade de mais de três, pois é muito difícil para os humanos comparar itens de tal complexidade de forma confiável sem um suporte para ajudar a comparação (MORISSETTE; CHARTIER, 2013).</p>
+<p>O algoritmo para a tarefa de agrupamento utilizado foi o K-means, segundo Morissette e Chartier (2013) o K-means é muito útil em dados exploratórios análise e mineração de dados em qualquer campo de pesquisa, e como o crescimento no poder do computador foi seguido por um crescimento na ocorrência de grandes conjuntos de dados, sua facilidade de implementação, eficiência computacional e pouco consumo de memória, manteve o agrupamento k-means muito popular, mesmo em comparação com outras técnicas de agrupamento.</p>
+<p><strong>Figura 02:</strong> Algoritmo K-means. <br> <img src="kmeans.png" width="400"> <br> <strong>Fonte:</strong> (BUITINCK et al, 2011).</p>
+<p>Cai, Le-Khac e Kechadi (2016) pesquisaram diferentes algoritmos de agrupamento para analisar diferentes conjuntos de dados financeiros para uma variedade de aplicativos; detecção de fraudes em cartões de crédito, transações de investimento, mercado de ações, etc. Ainda segundo eles, apesar da facilidade de aplicação do K-means, agrupamento baseado em centroide não lida bem com o ruído, sendo esta uma limitação.</p>
+<p>O algoritmo K-means agrupa dados em n grupos, buscando reduzir a variância interna das amostras em cada grupo, minimizando a soma de quadrados (inércia). Requer o número de clusters e consiste em três passos: inicialização dos centróides, atribuição de amostras aos centróides mais próximos e atualização dos centróides pela média das amostras atribuídas. O algoritmo repete esses passos até que os centróides não se movam significativamente. A inércia mede a coesão dos grupos, mas é limitada por pressupostos de convexidade e não é normalizada (BUITINCK et al, 2011).</p>
+<p><strong>Figura 03:</strong> Pipeline base do trabalho. <br> <img src="pipeline.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>… Continua na (parte II) Dados textuais e previsão de variáveis financeiras. Onde são analisados e discutido os resultados e conclusões.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© 2024, MECAP.LAB. &lt; / &gt;</div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mecaplab">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/mecaplab">
+      <i class="bi bi-instagram" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">Construído com <a href="https://quarto.org/">Quarto.org</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

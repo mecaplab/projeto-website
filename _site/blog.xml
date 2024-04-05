@@ -35,9 +35,186 @@
   <media:content url="https://mecaplab.netlify.app/blog/post_22/img_projeto_extensão_23.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Primeiro Blog Post</title>
+  <title>Parte II - Dados textuais e previsão de variáveis financeiras</title>
+  <dc:creator>Lucas S. Santos</dc:creator>
+  <link>https://mecaplab.netlify.app/blog/post_03/post03.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Continuação da <a href="../post_02/post02.html">Parte I - Dados textuais e previsão de variáveis financeiras.</a></p>
+<section id="resultados-e-discussão" class="level1">
+<h1>RESULTADOS E DISCUSSÃO</h1>
+<p>Partindo para a análise por clusters K-means, carregamos nosso corpus pré-processado anteriormente e salvo como arquivo csv. Contamos inicialmente com duas variáveis, que são a variável “Nome” que é o nome identificador de cada empresa e a variável “Texto”&nbsp; que nada mais é que a descrição das atividades das empresas, como visto abaixo.</p>
+<p><strong>Figura 04:</strong> Corpus. <br> <img src="https://mecaplab.netlify.app/blog/post_03/figura_04.png" width="500"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Depois criamos uma segunda tabela, desta vez com quatro variáveis conforme a “Figura 05: Corpus Pré-processado”, agora com as variáveis “Tokens_Preprocessados” e “Texto_Preprocessado”, essas variáveis são importantes para as próximas etapas e para que não seja necessário pré-processar os arquivos novamente, tarefa esta que demandou cerca de 30 minutos.</p>
+<p><strong>Figura 05:</strong> Corpus Pré-processado. <br> <img src="https://mecaplab.netlify.app/blog/post_03/figura_05.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Para uma compreensão geral no início da análise foi construído “Nuvens de Palavras” para que fosse possível visualizar as palavras mais frequentes em uma amostra dos nossos documentos. Após ter utilizado as nuvens de palavras para também ajudar a construir nosso arquivo de “StopWords” removendo assim estas palavras da nossa análise. Com o “TfidfVectorizer” da biblioteca sklearn, vetorizamos nosso corpus, como pode ser visto na “Figura 06: Vetor TF-IDF” uma parte dos vetores.</p>
+<p><strong>Figura 06:</strong> Vetor TF-IDF. <br> <img src="https://mecaplab.netlify.app/blog/post_03/figura_06.png" width="300"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Em seguida, analisamos através do “Gráfico 01: Top 50 tokens” os cinquenta tokens/palavras mais frequentes em nosso corpus, onde houve uma anomalia que consistiu em que os tokens “de” e “em”&nbsp; que foram postos anteriormente em nossa lista de StopWords, porém estes tokens ainda foram contados na análise, o que pode ter sido uma falha em nosso código. Essa distribuição de frequência nos fornece a frequência de cada item do vocabulário no texto. Como podemos ver considerando as palavras mais representativas para caracterizar a atividade de um setor de empresa em ambiente de bolsa as palavras mais frequentes não chegam a uma frequência de 50x e entre aquelas mais representativas e frequentes estão tokens como “energia”, “serviço”, “produto”, “elétrico”, “crédito”, “financeiro”, “imobiliário”, “distribuição” e “mercantil”.</p>
+<p><strong>Gráfico 01:</strong> Top 50 tokens. <br> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_01.png" width="600"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Como citado anteriormente o algoritmo K-means necessita que passemos para ele um número k de clusters, essa escolha é difícil principalmente porque estamos trabalhando com análise não-supervisionada, ou seja nossos dados não estão rotulados, e queremos testar justamente quantos clusters o algoritmo irá entender como ideal e quais empresas o K-means agrupa-rá juntamente como diferentes setores de atuação. Uma das maneiras de fazer isso, mas com algumas limitações, é o “Elbow Method” ou “Método Cotovelo” em tradução livre. Bengfort e Bilbro (2019) apresentaram uma visualização do método “cotovelo” para ajudar os cientistas de dados a selecionar o número ideal de clusters, ajustando o modelo com uma faixa de valores. Se o gráfico de linhas se assemelha a um braço, então o “cotovelo” (o ponto de inflexão na curva) é uma boa indicação de que o modelo subjacente se encaixa melhor nesse ponto.</p>
+<p>Sabemos que o número de clusters, que neste trabalho representam setores econômicos em que as empresas estão alocadas, conforme a B3 (2023) é de doze (12) setores econômicos, quarenta e cinco (45) subsetores econômicos e oitenta segmentos de atuação. Já o número de setores econômicos segundo a NAICS é de cento e quatro (104). Logo nosso número de grupos deve se assemelhar a estes números da B3 e também podendo ser comparado aos setores da NAICS. Pelo método cotovelo, temos um número ideal k de grupos igual a seis (6).</p>
+<p><strong>Gráfico 02:</strong> Método cotovelo para clusterização K-means. <br> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_02.png" width="600"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Utilizando outro método que é o Silhouette, também chamado de Coeficiente de Silhueta. O Coeficiente de Silhueta é usado quando a verdade fundamental sobre o conjunto de dados é desconhecida e calcula a densidade de clusters computados pelo modelo. O escore é calculado pela média do coeficiente de silhueta de cada amostra, calculado como a diferença entre a distância intra conglomerado média e a distância média mais próxima de cada amostra, normalizada pelo valor máximo. Isso produz uma pontuação entre 1 e -1, onde 1 é agrupamento altamente denso e -1 é agrupamento completamente incorreto (BENGFORT; BILBRO, 2019).</p>
+<p>Nossos critérios para selecionar a melhor visualização de cluster são os seguintes, conforme este método:</p>
+<ul>
+<li>Presença de mais aglomerados com pontuações de silhueta acima da média (conforme indicado pela linha tracejada).</li>
+<li>Menos flutuação no tamanho dos gráficos de silhueta (indicando aglomerados mais uniformes).</li>
+<li>Menos pontos negativos, que representam possíveis agrupamentos incorretos.</li>
+</ul>
+<p>Assim, usando a função <code>SilhouetteVisualizer</code> da biblioteca python <code>Yellowbrick</code>, vemos que diante dos critérios um bom número de clusters é vinte e sete (27). Comparando entre os dois métodos um bom k estaria entre 5 e 27, como vimos que nos critérios de classificação da B3&nbsp; o número é bem maior que cinco, utilizamos então o <code>k=27</code> conforme o coeficiente de silhueta, veja o Apêndice A – Coeficiente de Silhueta “Gráfico 03: Coeficiente de Silhueta” e verificamos na dispersão dos dados como o agrupamento se comportou.</p>
+<p>Com o nosso k selecionado, podemos então rodar o algoritmo K-means, mas antes uma técnica comumente aplicada juntamente com o K-means é a decomposição PCA para a redução de dimensionalidade dos nossos vetores, aplicamos então o PCA aos nossos vetores, esta é uma etapa muito importante para nosso resultado. Após rodar o K-means podemos visualizar o resultado conforme o “Gráfico 04: Dispersão dos clusters”.</p>
+<p><strong>Gráfico 04:</strong> Dispersão dos clusters. <br> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_04.png" width="600"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>Como observado na dispersão dos 27 clusters, há grupos bem condensados e grupos dispersos, os símbolos de “x” representam o centro de cada grupo. Com a análise tem-se no canto superior direito do “Gráfico 04” pontos que representam empresas sobrepostas as quais algumas delas são: Schulz e Tupy que são empresas do setor de autopeças, Telinvest e Zain que são do setor de telecomunicações, além de empresas como a Longdis do setor de administração entre outras empresas além das mencionadas. Tomando este grupo como exemplo, podemos supor que o método de clusterização por K-means nas várias descrições de atividades não se aplica bem, mas vale ressaltar que as descrições também podem não conter com descrições relevantes, ou seja palavras que fazem referência direta às atividades da empresa e que não são tão frequentes em todos os documentos de empresas do mesmo setor conforme a B3 ou NAICS, como vimos no método TF-IDF.</p>
+<p>Entretanto empresas do setor elétrico apresentam formulários de referência (FRE) com uma maior quantidade de texto descritivo e com palavras bem mais relevantes em termos de representação do setor, isso mostra que a CVM órgão que normatiza a estrutura da FRE, regula a sua entrega e recebe os formulários juntamente com a B3 podem tomar alguma medida de mudança quanto às normas e critérios de elaboração das FREs para que assim todas as empresas declarem sistematicamente sua atividades ano-ano, atualizando as informações aos investidores. Os pontos no canto superior esquerdo do gráfico mostram o agrupamento dessas empresas do setor elétrico, que conforme a NAICS podem ser empresas: “empresa de eletricidade, gás e água” ou “geração, transmissão e distribuição de energia elétrica”.</p>
+<p>Como o objetivo é agrupar as empresas semelhantes em grupos o mais distintos possíveis, é importante entender a similaridade entre os clusters para isso usamos a matriz de similaridade ou mapa de calor com valores entre 1 (maior similaridade) e -1 (menor similaridade) visualizados pelos tons mais escuros e mais claros.</p>
+<p>No “Gráfico 05: Matriz de similaridade” podemos notar que os clusters estão bem agrupados da perspectiva da similaridade entre os grupos, já que os valores da matriz variam bastante com relação a 1. Veja o Apêndice A – Coeficiente de Silhueta.</p>
+</section>
+<section id="conclusão" class="level1">
+<h1>CONCLUSÃO</h1>
+<p>Neste estudo, exploramos a aplicação de técnicas de Processamento de Linguagem Natural (PLN) e Aprendizado de Máquina (ML) na análise de dados não estruturados contidos em relatórios financeiros anuais de empresas brasileiras. Utilizando o algoritmo K-means, buscamos identificar clusters de empresas com atividades semelhantes a partir das descrições de suas atividades contidas nos Formulários de Referência (FRE) entregues à Comissão de Valores Mobiliários (CVM).</p>
+<p>Os resultados obtidos revelam insights interessantes sobre a similaridade das atividades das empresas em diferentes setores. Através da análise de clusters, observamos que algumas empresas do setor elétrico apresentam agrupamentos mais definidos, indicando uma maior concentração de palavras relevantes para esse setor nos seus relatórios. Por outro lado, em alguns casos, a técnica de clusterização não apresentou agrupamentos tão distintos, possivelmente devido à falta de informações descritivas específicas nas atividades declaradas pelas empresas, indicando a necessidade de aprimoramento na consistência das descrições de atividades.</p>
+<p>A contribuição deste estudo reside na demonstração da viabilidade do uso de dados não estruturados para identificar padrões e agrupamentos nas atividades empresariais. Além disso, destacamos a importância da qualidade e relevância das informações contidas nos relatórios financeiros, que podem impactar diretamente a eficácia das técnicas de análise. As empresas que fornecem descrições mais detalhadas e específicas sobre suas atividades tendem a se agrupar de maneira mais coesa. E isso pode ter implicações significativas para o mercado financeiro. Consequentemente observou-se que a maioria das empresas mesmo em igual setor usam poucas e diferentes palavras para autodescrição de suas atividades.</p>
+<p>Sugestões para estudos futuros incluem a expansão desta abordagem para análises de dados de anos subsequentes, a comparação entre diferentes algoritmos de agrupamento, que possam agrupar de forma melhor que o K-means, bem como a exploração de outras fontes de dados. Além disso, uma análise mais aprofundada das limitações e desafios da análise de dados não estruturados em finanças pode fornecer insights valiosos para futuras pesquisas.</p>
+</section>
+<section id="referências" class="level1">
+<h1>REFERÊNCIAS</h1>
+<p>B3. Critério de classificação. Disponível em: https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas.htm. Acesso em: 04 jun. 2023.</p>
+<p>BENGFORT, B; BILBRO, R. Yellowbrick: visualizing the scikit-learn model selection process. Journal Of Open Source Software, [S.l.], v. 4, n.&nbsp;35, p.&nbsp;1075, 24 mar. 2019. The Open Journal. http://dx.doi.org/10.21105/joss.01075.</p>
+<p>BUITINCK, L; et al.&nbsp;Scikit-learn: machine learning in python. Journal Of Machine Learning Research. [S. L.], p.&nbsp;2825-2830. out. 2011.</p>
+<p>CAI, F; LE-KHAC, N; KECHADI, M. Clustering Approaches for Financial Data Analysis: a Survey. 2016. School of Computer Science &amp; Informatics, University College Dublin, Ireland, 2016.</p>
+<p>GODEIRO, L. L. Ensaios sobre Modelos de Previsão Econômica. 2018. 116 f.&nbsp;Tese (Doutorado) - Curso de Economia, Universidade Federal da Paraíba, João Pessoa, 2018.</p>
+<p>HOBERG, Gerard; PHILLIPS, Gordon. Text-Based Network Industries and Endogenous Product Differentiation. Journal Of Political Economy, [S.L.], v. 124, n.&nbsp;5, p.&nbsp;1423-1465, out. 2016. University of Chicago Press. http://dx.doi.org/10.1086/688176.</p>
+<p>LOUGHRAN, Tim; MCDONALD, Bill. When Is a Liability Not a Liability? Textual Analysis, Dictionaries, and 10-Ks. The Journal Of Finance, [S.L.], v. 66, n.&nbsp;1, p.&nbsp;35-65, 6 jan. 2011. Wiley. http://dx.doi.org/10.1111/j.1540-6261.2010.01625.x.</p>
+<p>LOUGHRAN, T.; MCDONALD, B. Textual Analysis in Accounting and Finance: A Survey. Behavioral &amp; Experimental Finance eJournal, 2016.</p>
+<p>MOLNAR, C. Interpretable Machine Learning: a guide for making black box models explainable. 2. ed.&nbsp;[S. l.]: Lulu.com, 2022. Disponível em: https://christophm.github.io/interpretable-ml-book. Acesso em: 03 jun. 2023.</p>
+<p>MORISSETTE, L; CHARTIER, S. The k-means clustering technique: general considerations and implementation in mathematica. Tutorials In Quantitative Methods For Psychology, [S.L.], v. 9, n.&nbsp;1, p.&nbsp;15-24, 1 fev. 2013. The Quantitative Methods for Psychology. http://dx.doi.org/10.20982/tqmp.09.1.p015.</p>
+<p>NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). What are outliers in the data? Disponível em: https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm. Acesso em: 15 ago. 2023.</p>
+<p>PREMEBIDA, S. M. Guia de NLP - conceitos e técnicas. 2021. Disponível em: https://www.alura.com.br/artigos/guia-nlp-conceitos-tecnicas. Acesso em: 15 ago. 2023.</p>
+<p>QAISER, S; ALI, R. Text Mining: use of tf-idf to examine the relevance of words to documents. International Journal Of Computer Applications. [S. L.], p.&nbsp;25-29. ago. 2018. Disponível em: https://www.ijcaonline.org/archives/volume181/number1/qaiser-2018-ijca-917395.pdf. Acesso em: 16 maio. 2023.</p>
+<p>SINGER-VINE, Jeremy; CONTRIBUTORS, The Pdfplumber. Pdfplumber. 2023. Software. Disponível em: https://github.com/jsvine/pdfplumber. Acesso em: 15 ago. 2023.</p>
+<p>SPACY. Industrial-Strength Natural Language Processing: in python. in python. Disponível em: https://spacy.io/. Acesso em: 15 ago. 2023.</p>
+<p>TETLOCK, P. C.; SAAR-TSECHANSKY, M.; MACSKASSY, S. A. More than Words: Quantifying Language to Measure Firms’ Fundamentals. Texas Finance Festival, 2007.</p>
+<p>UNITED STATES. CENSUS BUREAU. NAICS Update Process Fact Sheet. Disponível em: https://www.census.gov/naics/reference_files_tools/NAICS_Update_Process_Fact_Sheet.pdf. Acesso em: 04 jun. 2023.**</p>
+<p><br></p>
+<hr>
+<p><br></p>
+</section>
+<section id="apêndices" class="level1">
+<h1>APÊNDICES</h1>
+<p><strong>Gráfico 03:</strong> Coeficiente de Silhueta. <br> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_03_1.png" width="100%"> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_03_2.png" width="100%"> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_03_3.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p><strong>Gráfico 05:</strong> Matriz de similaridade. <br> <img src="https://mecaplab.netlify.app/blog/post_03/gráfico_05.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+
+
+</section>
+
+ ]]></description>
+  <category>data_science</category>
+  <category>mercado_de_capitais</category>
+  <category>nlp</category>
+  <guid>https://mecaplab.netlify.app/blog/post_03/post03.html</guid>
+  <pubDate>Thu, 04 Apr 2024 03:00:00 GMT</pubDate>
+  <media:content url="https://mecaplab.netlify.app/blog/post_03/thumb_02.png" medium="image" type="image/png" height="89" width="144"/>
+</item>
+<item>
+  <title>Parte I - Dados textuais e previsão de variáveis financeiras</title>
+  <dc:creator>Lucas S. Santos</dc:creator>
+  <link>https://mecaplab.netlify.app/blog/post_02/post02.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Este artigo trata-se do produto de 1 ano de pesquisa e estudo do projeto de PIBIC desonvolvido por <code>Lucas Souza Santos</code> como bolsista entre <code>2022-2023</code>, com foco em Ciência de Dados e Mercado de Caítais.</p>
+<blockquote class="blockquote">
+<p>Este artigo não foi publicado oficialmente. Então não pode ser citado na integra. Seu resumo pode ser encontrado nos <a href="http://www.propesq.ufpb.br/propesq/contents/menu/publicacoes/anais-de-iniciacao-cientifica">Anais de Iniciação Científica — UNIVERSIDADE FEDERAL DA PARAÍBA - UFPB PRÓ-REITORIA DE PESQUISA - PROPESQ</a>, vigência 2022-2023.</p>
+</blockquote>
+<section id="resumo" class="level1">
+<h1>RESUMO</h1>
+<blockquote class="blockquote">
+<p>Este estudo aborda a aplicação de técnicas de Processamento de Linguagem Natural (PLN) e Aprendizado de Máquina (ML) para analisar dados textuais de relatórios financeiros anuais de empresas brasileiras. O objetivo é identificar padrões e agrupamentos nas atividades empresariais com base nas descrições das “Atividades do Emissor” nos Formulários de Referência (FRE) entregues à Comissão de Valores Mobiliários (CVM). O estudo utiliza o algoritmo K-means para realizar a clusterização dos documentos por similaridade. A análise começa com a obtenção e pré-processamento dos textos. A técnica de vetorização TF-IDF é aplicada para quantificar os textos, e o algoritmo K-means é usado para agrupar as empresas em clusters. A escolha do número de clusters é realizada através do método do cotovelo e do coeficiente de silhueta. Os resultados indicam que empresas do setor elétrico apresentam agrupamentos mais coesos, indicando a presença de palavras relevantes para esse setor nos relatórios. No entanto, em alguns casos, a clusterização não apresentou agrupamentos distintos, sugerindo a necessidade de melhorias na consistência das descrições de atividades, e outros algoritmos de agrupamento podem ser utilizados futuramente. O estudo demonstra que a qualidade e relevância das informações nos relatórios financeiros podem influenciar diretamente a eficácia das técnicas de análise. O trabalho contribui mostrando a viabilidade de usar dados não estruturados para identificar padrões nas atividades empresariais. Sugestões para futuros estudos incluem a expansão para anos subsequentes, a comparação de algoritmos de agrupamento e a exploração de outras fontes de dados.</p>
+</blockquote>
+</section>
+<section id="introdução" class="level1">
+<h1>INTRODUÇÃO</h1>
+<p>Atualmente, com a abundância de dados textuais disponíveis, especialmente em meios digitais como redes sociais, manchetes jornalísticas e relatórios empresariais, o interesse em extrair insights relevantes desse vasto acervo tem crescido consideravelmente. Técnicas computacionais, como Processamento de Linguagem Natural (PLN) e Machine Learning (ML), têm sido amplamente utilizadas para analisar esses dados e prever variáveis financeiras. Transformar a comunicação da linguagem humana em dados aos quais o computador possa entender.</p>
+<p>E para análise desses dados não-estruturados gerados no PLN um dos conjuntos de técnicas mais utilizados é o Machine Learning (ML), que é um conjunto de métodos que permitem aos computadores aprenderem com os dados para fazer e melhorar previsões (por exemplo, câncer, vendas semanais, inadimplência de crédito). O aprendizado de máquina é uma mudança de paradigma da “programação normal”, onde todas as instruções devem ser explicitamente dadas ao computador, para a “programação indireta” que ocorre por meio do fornecimento de dados (MOLNAR, 2022).</p>
+<p>A análise textual é uma área emergente em contabilidade e finanças e, como resultado, as taxonomias correspondentes ainda são um tanto imprecisas. A análise textual pode ser considerada como um subconjunto do que às vezes é rotulado de análise qualitativa, com a análise textual mais frequentemente caindo nas categorias de frases direcionadas, análise de sentimentos, modelagem de tópicos ou medidas de similaridade de documentos (LOUGHRAN; MCDONALD, 2016. p.&nbsp;2).</p>
+<p>Há várias vantagens e aplicações da quantificação de dados textuais, Tetlock; Saar-Tsechansky; Macskassy (2007) aplicam a análise textual de notícias do dia-a-dia para prever o lucro e retornos das empresas. Esse tipo de pesquisa aplicando métodos computacionais já é bastante difundido e utilizado no mercado financeiro americano, no estudo de estratégias de investimento e compreensão de diferentes tipos de ativos, sejam ações, ETFs, criptomoedas e afins. Na literatura brasileira alguns autores já aplicam essas metodologias ao mercado de ações do país, Godeiro (2018) por exemplo, utiliza textos de notícias financeiras para melhorar a previsão do prêmio de risco, aos investidores.</p>
+<p>O presente trabalho visa a coleta de dados textuais de relatórios financeiros anuais, entregues à Comissão de Valores Mobiliários (CVM) pelas empresas listadas na mesma, estes relatórios são chamados de Formulários de Referência (FRE). E assim, aplicar algoritmos de ML para clusterização (agrupamento) dos documentos por similaridade, identificando clusters por setor das empresas com base nas descrições das “Atividades do Emissor”, descritas nos FREs. Automatizando a classificação setorial a partir da autodeclaração das atividades das empresas.</p>
+<p>Também será utilizada a técnica de vetorização de textos TF-IDF. Artigos como Hoberg e Phillips (2016), Loughran e McDonald (2011), Loughran e McDonald (2016) e Tetlock, Saar-Tsechansky e Macskassy (2007) exploram a importância das palavras nos textos, relacionando a preços de ações e a outras variáveis financeiras, a técnica tf-idf dentre outras já citadas são amplamente utilizadas nestas pesquisas da área financeira.</p>
+<p>Segundo a B3 (2023), empresa do ambiente de bolsa e balcão do Brasil, a atual estrutura para a classificação setorial foi elaborada considerando-se, principalmente, os tipos e os usos dos produtos ou serviços desenvolvidos pelas empresas. Para a classificação das empresas, foram analisados os produtos ou serviços que mais contribuem para a formação das receitas das companhias, considerando-se, ainda, as receitas geradas no âmbito de empresas investidas de forma proporcional às participações acionárias detidas. No caso de companhias de participação, foi considerada a contribuição de cada setor na formação das receitas consolidadas, sendo que: Se algum setor representou participação maior ou igual a dois terços das receitas, a empresa de participação foi classificada nesse setor; Caso contrário, a empresa de participação foi classificada como holding diversificada.</p>
+<p>Nesta pesquisa, será feita a classificação das empresas por setor a partir da aplicação de um algoritmo de clusterização aos textos sobre as atividades que a empresa desenvolve, como já mencionado, esses grupos serão comparados com a classificação setorial da B3 e também com a classificação da NAICS que é o Sistema de Classificação da Indústria da América do Norte, um sistema de classificação padronizado usado para classificar empresas e atividades econômicas em setores específicos. Ele é usado principalmente pelos governos dos Estados Unidos, Canadá e México para coletar e analisar dados econômicos. O NAICS é baseado em princípios de produção incorporada e busca agrupar unidades produtoras que realizam atividades semelhantes usando recursos semelhantes (UNITED STATES, 2023).</p>
+<p>Além desta parte introdutório, este trabalho está dividido em objetivos (segunda parte), procedimentos metodológicos (terceira parte), resultados e discussão (quarta parte) e conclusão (quinta parte).</p>
+</section>
+<section id="objetivos" class="level1">
+<h1>OBJETIVOS</h1>
+<section id="objetivo-geral" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-geral">Objetivo Geral</h2>
+<p>O objetivo principal deste estudo é avaliar se os dados textuais provenientes de relatórios financeiros anuais de empresas brasileiras, quando submetidos a algoritmos de Machine Learning, possuem a mesma informatividade que os setores econômicos.</p>
+</section>
+<section id="objetivos-específicos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-específicos">Objetivos Específicos</h2>
+<ul>
+<li>Coletar dados textuais de relatórios anuais financeiros de empresas brasileiras.</li>
+<li>Aplicar técnicas de análise de dados, processamento de texto e machine learning para transformar os dados não estruturados em informações úteis aos modelos de clusterização de variáveis financeiras.</li>
+<li>Relacionar o agrupamento obtido com a classificação setorial vigente das empresas de capital aberto no Brasil.</li>
+</ul>
+</section>
+</section>
+<section id="procedimentos-metodológicos" class="level1">
+<h1>PROCEDIMENTOS METODOLÓGICOS</h1>
+<section id="obtenção-e-preparação-dos-dados" class="level2">
+<h2 class="anchored" data-anchor-id="obtenção-e-preparação-dos-dados">Obtenção e Preparação dos Dados</h2>
+<p>Informações textuais de publicações nos meios eletrônicos, sejam em redes sociais, blogs ou documentos formais como relatórios, os textos têm servido de matéria prima para vários pesquisadores de várias áreas e no ambiente financeiro e de mercado de capitais não é diferente. Para esta análise de PLN e Clusters foi obtido relatórios estruturados de todas as empresas listadas na Bolsa Brasileira (B3) e que entregaram a CVM e a B3 alguma versão do formulário de referência ao longo do ano de 2011, este ano foi escolhido por se tratar de um ano com menor número de empresas listadas do que demais anos subsequentes, outro motivo foi a ideia inicial de expandir posteriormente esta análise para os anos seguintes.</p>
+<p>Por limitações e dificuldades técnicas encontradas para a automatização do processo de downloads dos formulários por meio dos sites da CVM e da B3, os formulários foram obtidos manualmente através da página de consulta a documentos periódicos e estruturados de ações no mercado de renda variável da B3. Ao todo a consulta à B3 listou 586 empresas para consulta das FREs referente ao ano de 2011, porém apenas 580 dos arquivos listados estavam disponíveis para acesso.</p>
+<p>Chamaremos nosso conjunto de documentos/arquivos de corpus. Corpus é uma palavra do latim que significa corpo. Refere-se ao corpo de um texto, que pode ser escrito ou falado, contendo um ou mais idiomas. Para representar uma coleção de textos, temos a palavra corpora, plural de corpus. Esta coleção de textos pode ter um tema específico ou temas gerais. Alguns exemplos de textos usados em PLN são: resenhas de filmes, comentários da internet, reviews de cursos, críticas à aplicativos online, e-mails, entre outros (PREMEBIDA, 2021).</p>
+<p>Assim, após a obtenção de todas as FREs encontradas, foi realizado a aplicação de um algoritmo de elaboração própria para extração das descrições das atividades exercidas pelas empresas, contidas no tópico “7. Atividades do emissor.” dos relatórios baixados em PDF (Formato de Documento Portátil). Depois de extraídos, os textos foram salvos em arquivos TXT (Documento de texto), esta conversão foi necessária devido a necessidade de otimização do consumo de recursos computacionais e de tempo de execução.</p>
+<p>Seguindo com os filtros, para tornar o agrupamento dos clusters mais preciso, foi executado um segundo algoritmo para identificação e exclusão dos arquivos contendo apenas 200 palavras ou menos, restando 557 arquivos, por último foi realizado um terceiro filtro de forma manual, removendo arquivos que apresentaram ser outliers durante as primeiras visualizações gráficas do corpus em Word Clouds (Nuvem de Palavras), restando assim 550 arquivos mais relevantes, no caso destes outliers, eles possuíam muitos termos e símbolos irrelevantes repetidamente.</p>
+<p>Um outlier é uma observação que se encontra a uma distância anormal de outros valores em uma amostra aleatória de uma população. De certa forma, essa definição fica a cargo do analista (ou de um processo de consenso) para decidir o que será considerado anormal (NIST, 2023).</p>
+<p>Com o corpus pronto foi então realizado o pré-processamento dos arquivos, a partir da criação de uma lista de stopwords, que nada mais são do que ruídos no texto, como conectivos ou palavras irrelevantes para o objetivo do estudo em questão. Esta lista de stopwords foi incluída na lista padrão do modelo “pt_core_news_md” carregado da biblioteca do SpaCy, uma biblioteca python para PLN comumente utilizada.</p>
+<p>Em seguida foram executados a tokenização que é o processo de dividir uma frase em palavras ou tokens individuais. Durante esse processo, pontuações e caracteres especiais são completamente removidos. É importante ressaltar que os tokens não são necessariamente apenas uma palavra. De uma forma geral, tokenização é o ato de simplificar o corpus e prepará-lo para os outros estágios de processamento (PREMEBIDA, 2021).</p>
+<p>Uma terceira técnica aplicada aqui foi a normalização dos textos, feita para que o processo de análise seja mais preciso, tendo a característica de manter um padrão com todas as letras maiúsculas ou minúsculas. Geralmente, a normalização é feita depois do processo de tokenização, onde podemos encontrar frases que são semelhantes e fazer a combinação entre elas, caso queiramos, independente das diferenças (PREMEBIDA, 2021).</p>
+<p>Por fim, o corpus pré-processado foi salvo como CSV (Documento de Valores Separados Por Vírgula) para as análises posteriores.</p>
+</section>
+<section id="vetorização-e-clusterização" class="level2">
+<h2 class="anchored" data-anchor-id="vetorização-e-clusterização">Vetorização e Clusterização</h2>
+<p>Para quantificar os textos e fazer uma análise quanti por meio dos clusters precisa-se obter medidas estatísticas do corpus. Um método comum em NLP é o Bag-of-Words, porém a frequência dos termos isoladamente em cada documento não é a melhor medida. A técnica de bag of words nos permite representar o texto com a ocorrência de cada palavra, sem levar em conta a ordem das palavras ou a sua estrutura no texto. É realmente como se todas as palavras fossem colocadas dentro de um saco (PREMEBIDA, 2021).</p>
+<p>Assim, uma melhor forma para esta tarefa é a ponderação inversa da frequência do termo no documento. Os esquemas de ponderação são rotulados genericamente como tf.idf, onde tf (frequência do termo) representa o método usado para contabilizar a frequência e normalização da palavra, e idf (Inverso da Frequência no Documento) denota o método usado para ajustar o impacto em toda a coleção (LOUGHRAN; MCDONALD, 2011).</p>
+<p>Então, a pontuação TF-IDF de uma palavra em relação a um documento será calculada da seguinte maneira:</p>
+<p><code>TFIDF(palavra, documento) = TF(palavra, documento) * IDF(palavra)</code></p>
+<p><strong>Figura 01:</strong> Processo TF-IDF. <br> <img src="https://mecaplab.netlify.app/blog/post_02/tf_idf.svg" width="500"> <br> <strong>Fonte:</strong> Adaptado de (QAISER; ALI, 2018).</p>
+<p>O processo de TF-IDF apresenta etapas simples, a implementação deve seguir da parte superior à inferior. Mesmo que seja um processamento simples, é fundamental prestar bastante atenção na etapa de pré-processamento dos dados, para que se obtenha resultados fidedignos (QAISER; ALI, 2018).</p>
+<p>Na prática utilizou-se o método “TfidfVectorizer” da biblioteca do scikitlearn para a aplicação do TF-IDF na vetorização dos documentos (BUITINCK et al., 2011).</p>
+<p>A análise por clusterização ou agrupamento é a última etapa metodológica deste trabalho, utilizando algoritmo de agrupamento para maximizar a similaridade total com base no uso de palavras como Hoberg e Phillips (2016), que utilizaram palavras em descrições de produtos 10-K que é o correspondente norte americano da nossa FRE aqui do Brasil. No nosso trabalho, porém foram utilizadas descrições das atividades do emissor da FRE, ou seja, cada empresa de capital aberto no Brasil.</p>
+<p>Agrupamento de dados é uma forma de classificação não supervisionada, pois os clusters são formados pela avaliação de similaridades e diferenças de características intrínsecas entre diferentes casos, e o agrupamento de casos é baseado naqueles emergentes semelhanças e não em um critério externo. Além disso, estas técnicas podem ser úteis para conjuntos de dados de qualquer dimensionalidade de mais de três, pois é muito difícil para os humanos comparar itens de tal complexidade de forma confiável sem um suporte para ajudar a comparação (MORISSETTE; CHARTIER, 2013).</p>
+<p>O algoritmo para a tarefa de agrupamento utilizado foi o K-means, segundo Morissette e Chartier (2013) o K-means é muito útil em dados exploratórios análise e mineração de dados em qualquer campo de pesquisa, e como o crescimento no poder do computador foi seguido por um crescimento na ocorrência de grandes conjuntos de dados, sua facilidade de implementação, eficiência computacional e pouco consumo de memória, manteve o agrupamento k-means muito popular, mesmo em comparação com outras técnicas de agrupamento.</p>
+<p><strong>Figura 02:</strong> Algoritmo K-means. <br> <img src="https://mecaplab.netlify.app/blog/post_02/kmeans.png" width="400"> <br> <strong>Fonte:</strong> (BUITINCK et al, 2011).</p>
+<p>Cai, Le-Khac e Kechadi (2016) pesquisaram diferentes algoritmos de agrupamento para analisar diferentes conjuntos de dados financeiros para uma variedade de aplicativos; detecção de fraudes em cartões de crédito, transações de investimento, mercado de ações, etc. Ainda segundo eles, apesar da facilidade de aplicação do K-means, agrupamento baseado em centroide não lida bem com o ruído, sendo esta uma limitação.</p>
+<p>O algoritmo K-means agrupa dados em n grupos, buscando reduzir a variância interna das amostras em cada grupo, minimizando a soma de quadrados (inércia). Requer o número de clusters e consiste em três passos: inicialização dos centróides, atribuição de amostras aos centróides mais próximos e atualização dos centróides pela média das amostras atribuídas. O algoritmo repete esses passos até que os centróides não se movam significativamente. A inércia mede a coesão dos grupos, mas é limitada por pressupostos de convexidade e não é normalizada (BUITINCK et al, 2011).</p>
+<p><strong>Figura 03:</strong> Pipeline base do trabalho. <br> <img src="https://mecaplab.netlify.app/blog/post_02/pipeline.png" width="100%"> <br> <strong>Fonte:</strong> Elaboração própria (2023).</p>
+<p>… Continua em <a href="../post_03/post03.html">Parte II - Dados textuais e previsão de variáveis financeiras.</a> Onde são analisados e discutido os resultados e conclusões.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>data_science</category>
+  <category>mercado_de_capitais</category>
+  <category>nlp</category>
+  <guid>https://mecaplab.netlify.app/blog/post_02/post02.html</guid>
+  <pubDate>Wed, 03 Apr 2024 03:00:00 GMT</pubDate>
+  <media:content url="https://mecaplab.netlify.app/blog/post_02/thumb_02.png" medium="image" type="image/png" height="89" width="144"/>
+</item>
+<item>
+  <title>Boas vindas!</title>
   <dc:creator>Mecaplab </dc:creator>
-  <link>https://mecaplab.netlify.app/blog/post_01/</link>
+  <link>https://mecaplab.netlify.app/blog/post_01/post01.html</link>
   <description><![CDATA[ 
 
 
@@ -45,14 +222,15 @@
 
 
 <section id="bem-vindo-ao-blog-do-mecaplab" class="level1">
-
+<h1>Bem vindo ao blog do MECAPLAB!</h1>
+<p>Vamos compartilhar conhecimento de aluno para aluno, de aluno para comunidade. Então, não deixe de nos acompanhar!</p>
 
 
 </section>
 
  ]]></description>
   <category>Notícia</category>
-  <guid>https://mecaplab.netlify.app/blog/post_01/</guid>
+  <guid>https://mecaplab.netlify.app/blog/post_01/post01.html</guid>
   <pubDate>Sun, 31 Mar 2024 03:00:00 GMT</pubDate>
   <media:content url="https://mecaplab.netlify.app/blog/post_01/thumb-01.jpg" medium="image" type="image/jpeg"/>
 </item>

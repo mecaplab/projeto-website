@@ -1,6 +1,6 @@
 ---
 title: "Cuidando das Finanças Pessoais - Ano 3"
-author: "Mecaplab"
+author: "Adalto-Alves"
 date: "2024-04-05"
 categories: [PROJETO]
 image: img_projeto_extensão_23.jpg
