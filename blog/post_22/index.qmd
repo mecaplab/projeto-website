@@ -1,9 +1,9 @@
 ---
-title: "Projeto de Extensão: Cuidando das Finanças Pessoais - Ano 3"
+title: "Cuidando das Finanças Pessoais - Ano 3"
 author: "Mecaplab"
 date: "2024-04-05"
 categories: [PROJETO]
-image: blog/post_22/img_projeto_extensão_23.jpg
+image: img_projeto_extensão_23.jpg
 ---
 
 ## Resumo do projeto 

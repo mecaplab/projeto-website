@@ -9,26 +9,50 @@
 <link>https://mecaplab.netlify.app/blog.html</link>
 <atom:link href="https://mecaplab.netlify.app/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Site do MECAP.LAB</description>
-<generator>quarto-1.3.450</generator>
-<lastBuildDate>Sun, 31 Mar 2024 03:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.549</generator>
+<lastBuildDate>Fri, 05 Apr 2024 03:00:00 GMT</lastBuildDate>
 <item>
-  <title>Primeiro Blog Post</title>
+  <title>Cuidando das Finanças Pessoais - Ano 3</title>
   <dc:creator>Mecaplab </dc:creator>
-  <link>https://mecaplab.netlify.app/blog/post_01/index.html</link>
+  <link>https://mecaplab.netlify.app/blog/post_22/</link>
   <description><![CDATA[ 
 
 
 
 
+
+<section id="resumo-do-projeto" class="level2">
+<h2 class="anchored" data-anchor-id="resumo-do-projeto">Resumo do projeto</h2>
+<p>A educação financeira consiste no caminho pelo qual as pessoas podem obter conhecimento sobre temas financeiros e desenvolver competências e capacidades próprias de gestão, planejamento e investimento de seus recursos disponíveis. Assim, o projeto de extensão Cuidando das finanças Pessoais – Ano 3, teve como objetivo promover a capacidade requerida pela educação financeira na comunidade que aderiu a participar dos cursos ofertados pelo projeto, bem como levar aos participantes conhecimentos sobre os principais temas financeiros como: crédito, endividamento, investimento e orçamento financeiro pessoal e familiar, além de estimular comportamento que conduza os indivíduos a melhorar sua qualidade de vida, manutenção ou acumulação de capital e gerenciamento dos seus compromissos.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>PROJETO</category>
+  <guid>https://mecaplab.netlify.app/blog/post_22/</guid>
+  <pubDate>Fri, 05 Apr 2024 03:00:00 GMT</pubDate>
+  <media:content url="https://mecaplab.netlify.app/blog/post_22/img_projeto_extensão_23.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Primeiro Blog Post</title>
+  <dc:creator>Mecaplab </dc:creator>
+  <link>https://mecaplab.netlify.app/blog/post_01/</link>
+  <description><![CDATA[ 
+
+
+
+
+
 <section id="bem-vindo-ao-blog-do-mecaplab" class="level1">
-<h1>Bem vindo ao blog do MECAPLAB!</h1>
+
 
 
 </section>
 
  ]]></description>
   <category>Notícia</category>
-  <guid>https://mecaplab.netlify.app/blog/post_01/index.html</guid>
+  <guid>https://mecaplab.netlify.app/blog/post_01/</guid>
   <pubDate>Sun, 31 Mar 2024 03:00:00 GMT</pubDate>
   <media:content url="https://mecaplab.netlify.app/blog/post_01/thumb-01.jpg" medium="image" type="image/jpeg"/>
 </item>
