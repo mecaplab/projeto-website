@@ -10,10 +10,34 @@
 <atom:link href="https://mecaplab.netlify.app/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Site do MECAP.LAB</description>
 <generator>quarto-1.4.549</generator>
-<lastBuildDate>Fri, 05 Apr 2024 03:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 10 Apr 2024 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>Material do estudante</title>
+  <dc:creator>Mecaplab </dc:creator>
+  <link>https://mecaplab.netlify.app/blog/post_05/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="sobre" class="level2">
+<h2 class="anchored" data-anchor-id="sobre">Sobre</h2>
+<p>O ‘Material do estudante’ é uma página do Mecaplab destinada àqueles que queiram adquirir conhecimento sobre ferramentas amplamente usadas e atuais, as quais possibilitam indivíduos manusear novas técnicas e linguagens de análise de dados e desenvolver sua capacidade analítica em tarefas complexas ou até mesmo simples do dia a dia. O estudante poderá acessar na página livros, cursos, repositórios do git e sites indicados de grande relevância. A maioria dos materiais de acesso são gratuitos, mas ressaltamos que aqueles que não obterem êxito ao acessar, que entrem em contato com a nossa equipe do Mecaplab para podermos auxiliá-los.</p>
+<p>O link abaixo vai levá-lo(a) diretamente para página: https://github.com/mecaplab/MECAPLAB_study_space.git</p>
+<p>Bons estudos!!!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Notícia</category>
+  <guid>https://mecaplab.netlify.app/blog/post_05/</guid>
+  <pubDate>Wed, 10 Apr 2024 03:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Cuidando das Finanças Pessoais - Ano 3</title>
-  <dc:creator>Mecaplab </dc:creator>
+  <dc:creator>Adalto-Alves </dc:creator>
   <link>https://mecaplab.netlify.app/blog/post_22/</link>
   <description><![CDATA[ 
 

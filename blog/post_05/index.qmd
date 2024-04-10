@@ -1,0 +1,17 @@
+---
+title: "Material do estudante"
+author: "Mecaplab"
+date: "2024-04-10"
+categories: [Notícia]
+---
+
+## Sobre
+
+
+O 'Material do estudante' é uma página do Mecaplab destinada àqueles que queiram adquirir conhecimento sobre ferramentas amplamente usadas e atuais, as quais possibilitam indivíduos manusear novas técnicas e linguagens de análise de dados e desenvolver sua capacidade analítica em tarefas complexas ou até mesmo simples do dia a dia. O estudante poderá acessar na página  livros, cursos, repositórios do git e sites indicados de grande relevância. A maioria dos materiais de acesso são gratuitos, mas ressaltamos que aqueles que não obterem êxito ao acessar, que entrem em contato com a nossa equipe do Mecaplab para podermos auxiliá-los.
+O link abaixo vai levá-lo(a) diretamente para página.
+
+Bons estudos!!!
+
+
+[Clique aqui!](https://github.com/mecaplab/MECAPLAB_study_space.git)
